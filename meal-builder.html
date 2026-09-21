@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>مطعم هيلثي لايف -اصنع وجبتك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F7F5EE; --surface:#FFFFFF; --surface-sunken:#F1EEE3;
+  --ink:#1D2A1F; --ink-soft:#5C6B5E; --ink-faint:#93A093;
+  --primary:#22402B; --primary-soft:#3E5B44; --primary-tint:#E6EDE4;
+  --accent:#B4832A; --accent-tint:#F5E9D2;
+  --mint:#DCEFD6; --mint-ink:#1E3D22; --mint-line:#B9DCB0;
+  --line:#E2DED0; --line-strong:#CFC9B6; --danger:#A3432F;
+  --radius-lg:18px; --radius-md:12px; --radius-sm:8px;
+  --shadow-card:0 1px 2px rgba(29,42,31,.06),0 6px 16px -10px rgba(29,42,31,.18);
+  --font-display:'Fraunces',Georgia,serif; --font-ar:'Cairo','Tajawal',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--font-ar);background:var(--bg);color:var(--ink);-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--font-display);font-weight:600}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,html[dir="rtl"] h4{font-family:var(--font-ar)}
+p{margin:0}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.screen{display:none;min-height:100vh}
+.screen.active{display:block}
+html[dir="rtl"] .flip-rtl{transform:scaleX(-1)}
+
+/* landing */
+.landing{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 900px 500px at 15% -10%,#2E4E36 0%,transparent 60%),
+             radial-gradient(ellipse 700px 600px at 110% 10%,#1A3320 0%,transparent 55%),var(--primary);
+  color:#F6F4EA}
+.landing-topbar{display:flex;align-items:center;justify-content:space-between;padding:28px clamp(20px,5vw,60px) 0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(155deg,#C7A24A,#8E6A22);
+  display:flex;align-items:center;justify-content:center;color:#20200F;font-family:var(--font-display);font-weight:700;font-size:17px}
+.brand-name{font-size:18px;font-weight:700}
+.brand-sub{font-size:11px;color:#B9C7B8;margin-top:1px}
+.lang-toggle{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#F1EFE4;
+  padding:9px 15px;border-radius:var(--radius-sm);font-size:13px;font-weight:700}
+.landing-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px 56px}
+.hero-tag{font-size:13.5px;color:#D9C99A;margin-bottom:18px;font-weight:600}
+.hero-image{width:min(190px,36vw);height:min(190px,36vw);border-radius:30px;margin-bottom:30px;
+  background:radial-gradient(circle at 32% 28%,#E7CE8C,#C7A24A 45%,#8E6A22 100%);
+  box-shadow:0 26px 60px -18px rgba(0,0,0,.55),inset 0 0 0 8px rgba(255,255,255,.06);position:relative}
+.hero-image svg{position:absolute;inset:0;margin:auto;width:44%;height:44%}
+h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;color:#FBF9F1}
+.hero-title em{font-style:normal;color:#DDC48A}
+.hero-copy{margin-top:16px;max-width:48ch;color:#C4D0C1;font-size:15px;line-height:1.65}
+.hero-cta{margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:#F6F4EA;color:#20301F;
+  border:none;padding:17px 28px;border-radius:var(--radius-md);font-size:15px;font-weight:700;
+  box-shadow:0 14px 28px -10px rgba(0,0,0,.5)}
+.hero-cta:active{transform:scale(.97)}
+.landing-footer{text-align:center;padding:0 24px 28px;color:#8FA08D;font-size:12.5px}
+
+/* app chrome */
+.app-header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  padding:14px clamp(16px,3vw,32px)}
+.app-header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.header-left{display:flex;align-items:center;gap:10px;min-width:0}
+.icon-btn{width:40px;height:40px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0}
+.icon-btn svg{width:17px;height:17px}
+.header-title{font-size:14px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-title strong{color:var(--ink);font-weight:800}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.chip-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:12.5px;font-weight:700;
+  padding:8px 12px;border-radius:var(--radius-sm)}
+
+.app-main{max-width:1200px;width:100%;margin:0 auto;padding:24px clamp(16px,3vw,32px) 140px}
+.section-head{margin-bottom:18px}
+.section-kicker{font-size:12px;font-weight:800;color:var(--accent)}
+.section-title{font-size:clamp(21px,2.6vw,28px);margin-top:4px}
+.section-hint{margin-top:6px;color:var(--ink-soft);font-size:13.5px}
+
+/* tiles (setup screen) */
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:22px}
+.tile{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius-md);padding:18px 10px;
+  text-align:center;font-weight:800;font-size:15px;color:var(--ink)}
+.tile.selected{border-color:var(--primary);background:var(--primary-tint);color:var(--primary)}
+.tile .tile-sub{display:block;font-weight:600;font-size:11.5px;color:var(--ink-faint);margin-top:4px}
+.tile.selected .tile-sub{color:var(--primary-soft)}
+.meal-setup-block{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:16px;margin-bottom:14px}
+.meal-setup-block h3{font-size:15px;margin-bottom:10px}
+
+/* category chips */
+.cat-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px}
+.cat-chip{flex-shrink:0;border:1.5px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  padding:10px 16px;border-radius:100px;font-size:13.5px;font-weight:700;white-space:nowrap}
+.cat-chip.active{border-color:var(--primary);background:var(--primary);color:#fff}
+
+/* item grid + cards (small squares) */
+.card-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(126px,1fr))}
+.item-card{background:var(--surface);border:1.5px solid var(--line);border-inline-start:4px solid var(--cat-color,var(--line));
+  border-radius:var(--radius-md);padding:10px;display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow-card);position:relative}
+.item-card.selected{border-color:var(--primary);border-inline-start-color:var(--primary);background:var(--primary-tint)}
+.item-name{font-size:12.5px;font-weight:700;line-height:1.3;min-height:32px}
+.item-thumb{width:100%;aspect-ratio:1/1;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-sunken)}
+.item-thumb.wide{aspect-ratio:4/3}
+.item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.flat-card .item-thumb{margin-bottom:2px}
+.item-meta{font-size:10.5px;color:var(--ink-soft);font-weight:600}
+.item-price{color:var(--primary)}
+.select-btn{padding:8px;border-radius:var(--radius-sm);border:1.5px solid var(--primary);background:transparent;
+  color:var(--primary);font-weight:800;font-size:12px}
+.item-card.selected .select-btn{background:var(--primary);color:#fff}
+.role-badge{position:absolute;top:7px;inset-inline-end:7px;background:var(--accent);color:#2A1D06;font-size:9.5px;
+  font-weight:800;padding:2px 6px;border-radius:100px}
+.qty-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-radius:var(--radius-sm);
+  padding:4px;border:1.5px solid var(--primary)}
+.qty-btn{width:28px;height:28px;border-radius:6px;border:none;background:var(--primary);color:#fff;font-weight:800;font-size:15px}
+.qty-btn:disabled{background:var(--line-strong);color:var(--ink-faint)}
+.qty-value{font-weight:800;font-size:12px}
+.remove-x{position:absolute;top:6px;inset-inline-start:6px;width:20px;height:20px;border-radius:50%;border:none;
+  background:var(--danger);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}
+.limit-note{background:var(--accent-tint);border:1px dashed var(--accent);border-radius:var(--radius-sm);padding:10px 12px;
+  font-size:12.5px;color:#6B4E17;margin-bottom:14px}
+.empty-note{border:1.5px dashed var(--line-strong);border-radius:var(--radius-md);padding:20px;text-align:center;
+  color:var(--ink-faint);font-size:13px;grid-column:1/-1}
+
+/* flat option rows (sauce/dessert/drink) */
+.flat-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.flat-card{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius-md);padding:12px;
+  display:flex;flex-direction:column;gap:8px}
+.flat-card.selected{border-color:var(--primary);background:var(--primary-tint)}
+.flat-name{font-weight:700;font-size:13px}
+.flat-meta{font-size:11px;color:var(--ink-soft)}
+
+/* nav buttons */
+.step-nav{display:flex;gap:10px;margin-top:24px}
+.nav-btn{flex:1;padding:15px;border-radius:var(--radius-md);font-weight:800;font-size:14.5px;border:none;
+  display:flex;align-items:center;justify-content:center;gap:8px}
+.nav-btn svg{width:16px;height:16px}
+.nav-btn.primary{background:var(--primary);color:#fff}
+.nav-btn.primary.is-skip{background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong)}
+.nav-btn.ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line);flex:0 0 auto;padding:15px 20px}
+.inline-warning{margin-top:12px;font-size:12.5px;color:var(--danger);display:flex;align-items:center;gap:8px}
+
+/* running summary sidebar */
+.summary-bar{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);
+  padding:14px clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:15}
+.summary-kcal{font-family:var(--font-display);font-size:20px;color:var(--mint-ink)}
+.summary-kcal span{font-size:12px;font-weight:700;color:var(--ink-soft)}
+.summary-price{font-family:var(--font-display);font-size:20px;color:var(--primary)}
+
+/* review screen */
+.meal-review-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px}
+.meal-review-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.meal-review-head h3{font-size:15px}
+.meal-review-nutrition{background:var(--mint);border:1px solid var(--mint-line);border-radius:var(--radius-md);
+  padding:12px 14px;display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.meal-review-lines{font-size:12.5px;color:var(--ink-soft);line-height:1.9}
+.grand-box{background:linear-gradient(160deg,var(--primary),#17281B);border-radius:var(--radius-lg);padding:22px;color:#F4F1E6;margin-top:8px}
+.grand-box-row{display:flex;align-items:center;gap:20px}
+.grand-title{margin-top:14px;font-size:12px;font-weight:700;color:#C7D3C4}
+.donut-wrap{position:relative;flex-shrink:0}
+.donut-wrap svg{display:block}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-display)}
+.donut-center span{font-family:var(--font-ar);font-weight:700;opacity:.8}
+.macro-legend{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:700}
+.macro-legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:7px}
+.grand-price{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;align-items:baseline}
+.grand-price-value{font-family:var(--font-display);font-size:28px}
+.add-order-btn{width:100%;padding:17px;border-radius:var(--radius-md);border:none;background:var(--accent);color:#2A1D06;
+  font-weight:800;font-size:15px;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-order-btn:disabled{background:var(--line-strong);color:var(--ink-faint)}
+
+/* confirm */
+.confirm{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:40px 24px;background:var(--bg)}
+.confirm-badge{width:78px;height:78px;border-radius:var(--radius-lg);background:var(--mint);display:flex;
+  align-items:center;justify-content:center;margin-bottom:24px}
+.confirm-badge svg{width:34px;height:34px;color:var(--mint-ink)}
+.confirm h2{font-size:25px}
+.confirm p{margin-top:10px;color:var(--ink-soft);max-width:34ch;line-height:1.55}
+.order-num{margin-top:22px;background:var(--surface);border:1.5px dashed var(--line-strong);border-radius:var(--radius-md);
+  padding:14px 24px;font-family:var(--font-display);font-size:22px;color:var(--primary)}
+.confirm-btn{margin-top:30px;padding:15px 28px;border-radius:var(--radius-md);border:none;background:var(--primary);
+  color:#fff;font-weight:700;font-size:14px}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  <section class="screen active" id="screen-landing">
+    <div class="landing">
+      <div class="landing-topbar">
+        <div class="brand">
+          <div class="brand-mark">V</div>
+          <div><div class="brand-name" id="brand-name">هيلثي لايف</div><div class="brand-sub" id="brand-sub">مطعم صحي</div></div>
+        </div>
+        <button class="lang-toggle lang-toggle-btn" id="btn-lang-landing">English</button>
+      </div>
+      <div class="landing-hero">
+        <div class="hero-tag" id="hero-tag"></div>
+        <div class="hero-image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3A2A08" stroke-width="1.4"><path d="M12 3c-3.5 0-6 2.7-6 6.2 0 3.3 2.4 6 5 8.6.6.6 1.4.6 2 0 2.6-2.6 5-5.3 5-8.6C18 5.7 15.5 3 12 3z"/></svg>
+        </div>
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-copy" id="hero-copy"></p>
+        <button class="hero-cta" id="btn-start-building">
+          <span id="hero-cta-label"></span>
+          <svg class="flip-rtl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <div class="landing-footer" id="footer-line"></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-flow">
+    <div id="flow-root"></div>
+  </section>
+
+  <section class="screen" id="screen-confirm">
+    <div class="confirm">
+      <div class="confirm-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-copy"></p>
+      <div class="order-num" id="confirm-order-num">#000</div>
+      <button class="confirm-btn" id="btn-new-meal"></button>
+    </div>
+  </section>
+
+</div>
+<script>
+
+"use strict";
+
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const CONFIG = {
+  currency: "SAR",
+  orderApiUrl: "https://daftara.onrender.com/api/create-order",
+};
+
+/* ============================================================
+   MENU DATA  (from the restaurant's real spreadsheet + price list)
+   ============================================================ */
+const MENU = {"PROTEIN_CATEGORIES": [{"key": "chicken", "name": "دجاج", "priceBase100": 19, "priceAdd50": 4, "items": [{"id": "chk-grilled", "name": "دجاج مشوي", "caloriesPer100g": 163.3, "proteinPer100g": 30.7, "carbsPer100g": 0.7, "fatPer100g": 4.0}, {"id": "chk-mandi", "name": "دجاج مندي", "caloriesPer100g": 163.3, "proteinPer100g": 28.7, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-shawarma", "name": "دجاج شاورما", "caloriesPer100g": 163.3, "proteinPer100g": 27.3, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-fajita", "name": "دجاج فاهيتا", "caloriesPer100g": 163.3, "proteinPer100g": 29.3, "carbsPer100g": 2.7, "fatPer100g": 4.0}, {"id": "chk-shish-tawook", "name": "دجاج شيش طاووق", "caloriesPer100g": 163.3, "proteinPer100g": 28.0, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-dynamite", "name": "دجاج داينمت", "caloriesPer100g": 196.7, "proteinPer100g": 26.7, "carbsPer100g": 5.3, "fatPer100g": 6.7}, {"id": "chk-corn", "name": "دجاج الذرة", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 5.3, "fatPer100g": 5.3}, {"id": "chk-special", "name": "دجاج سبيشل", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-tandoori", "name": "دجاج تندوري", "caloriesPer100g": 170.0, "proteinPer100g": 25.3, "carbsPer100g": 2.0, "fatPer100g": 4.7}, {"id": "chk-ranch", "name": "دجاج رانش", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-french", "name": "دجاج فرنسي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-curry", "name": "دجاج كاري", "caloriesPer100g": 176.7, "proteinPer100g": 24.7, "carbsPer100g": 0.7, "fatPer100g": 5.3}, {"id": "chk-bbq", "name": "دجاج BBQ", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-satay", "name": "دجاج ساتيه", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.0}, {"id": "chk-chinese", "name": "دجاج صيني", "caloriesPer100g": 190.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-lemon", "name": "دجاج ليمون", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-dill", "name": "دجاج شبت", "caloriesPer100g": 176.7, "proteinPer100g": 26.0, "carbsPer100g": 1.0, "fatPer100g": 5.3}, {"id": "chk-butter", "name": "دجاج بالزبدة", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-teriyaki", "name": "دجاج ترياكي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-cream", "name": "دجاج كريمة", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 7.3}, {"id": "chk-biryani", "name": "دجاج برياني", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-paprika", "name": "دجاج بابريكا", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-paprika-fit", "name": "دجاج بابريكا فيت", "caloriesPer100g": 186.7, "proteinPer100g": 29.3, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-crispy", "name": "دجاج كرسبي", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-bamya", "name": "دجاج بامية", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-molokhia", "name": "دجاج ملوخية", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-black-pepper", "name": "دجاج فلفل أسود", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-thyme", "name": "دجاج زعتر", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.0, "fatPer100g": 6.0}, {"id": "chk-stroganoff", "name": "دجاج ستروجانوف", "caloriesPer100g": 183.3, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-masala", "name": "دجاج ماسالا", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 0.7, "fatPer100g": 6.0}, {"id": "chk-cajun", "name": "دجاج الكاجون", "caloriesPer100g": 186.7, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}]}, {"key": "meat", "name": "لحم", "priceBase100": 20, "priceAdd50": 5, "items": [{"id": "meat-balls", "name": "كرات لحم", "caloriesPer100g": 210.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-fajita", "name": "لحم فاهيتا", "caloriesPer100g": 196.7, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 8.7}, {"id": "meat-chinese", "name": "لحم صيني", "caloriesPer100g": 203.3, "proteinPer100g": 29.3, "carbsPer100g": 4.0, "fatPer100g": 8.0}, {"id": "meat-stroganoff", "name": "لحم ستروجانوف", "caloriesPer100g": 210.0, "proteinPer100g": 30.7, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-bbq", "name": "لحم باربيكيو", "caloriesPer100g": 203.3, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 9.3}, {"id": "meat-steak", "name": "لحم استيك", "caloriesPer100g": 206.7, "proteinPer100g": 31.3, "carbsPer100g": 0.7, "fatPer100g": 9.3}, {"id": "meat-cream", "name": "لحم كريمة", "caloriesPer100g": 220.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 12.0}, {"id": "meat-masala", "name": "لحم ماسالا", "caloriesPer100g": 190.0, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 8.0}]}, {"key": "fish", "name": "سمك", "priceBase100": 19, "priceAdd50": 5, "items": [{"id": "fish-grilled", "name": "سمك مشوي", "caloriesPer100g": 143.3, "proteinPer100g": 27.3, "carbsPer100g": 0.7, "fatPer100g": 3.3}, {"id": "fish-tahini", "name": "سمك طحينة", "caloriesPer100g": 156.7, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 5.3}, {"id": "fish-dill-lemon", "name": "سمك شبت وليمون", "caloriesPer100g": 146.7, "proteinPer100g": 27.3, "carbsPer100g": 1.3, "fatPer100g": 3.7}]}, {"key": "salmon", "name": "سلمون", "priceBase100": 28, "priceAdd50": 8, "items": [{"id": "salmon-grilled", "name": "سلمون مشوي", "caloriesPer100g": 203.3, "proteinPer100g": 32.0, "carbsPer100g": 0.7, "fatPer100g": 10.7}, {"id": "salmon-dill-lemon", "name": "سلمون شبت وليمون", "caloriesPer100g": 210.0, "proteinPer100g": 31.3, "carbsPer100g": 1.3, "fatPer100g": 11.3}, {"id": "salmon-madfoon", "name": "سلمون مدفون", "caloriesPer100g": 216.7, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 12.0}]}, {"key": "shrimp", "name": "روبيان", "priceBase100": 27, "priceAdd50": 8, "items": [{"id": "shrimp-grilled", "name": "جمبري مشوي", "caloriesPer100g": 143.3, "proteinPer100g": 29.3, "carbsPer100g": 0.7, "fatPer100g": 3.3}, {"id": "shrimp-cream-corn", "name": "جمبري كريمة وذرة", "caloriesPer100g": 176.7, "proteinPer100g": 28.0, "carbsPer100g": 1.3, "fatPer100g": 6.7}, {"id": "shrimp-cajun", "name": "جمبري كيجن", "caloriesPer100g": 150.0, "proteinPer100g": 30.0, "carbsPer100g": 1.3, "fatPer100g": 4.0}]}], "CARB_ITEMS": [{"id": "rice-white", "name": "رز أبيض", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.0, "fatPer100g": 0.3}, {"id": "rice-mandi", "name": "رز مندي", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 26.7, "fatPer100g": 2.3}, {"id": "rice-kabsa", "name": "رز كبسة", "priceAdd50": 2, "caloriesPer100g": 143.3, "proteinPer100g": 3.3, "carbsPer100g": 28.0, "fatPer100g": 2.0}, {"id": "rice-biryani", "name": "رز برياني", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.7, "fatPer100g": 2.3}, {"id": "potato-grilled", "name": "بطاطس مشوية", "priceAdd50": 3, "caloriesPer100g": 96.7, "proteinPer100g": 2.0, "carbsPer100g": 22.7, "fatPer100g": 0.1}, {"id": "potato-mashed", "name": "بطاطس مهروسة", "priceAdd50": 3, "caloriesPer100g": 110.0, "proteinPer100g": 2.0, "carbsPer100g": 20.0, "fatPer100g": 2.7}, {"id": "sweet-potato", "name": "بطاطس حلوة", "priceAdd50": 3, "caloriesPer100g": 86.7, "proteinPer100g": 1.3, "carbsPer100g": 20.0, "fatPer100g": 0.2}, {"id": "pasta", "name": "باستا", "priceAdd50": 4, "caloriesPer100g": 150.0, "proteinPer100g": 4.7, "carbsPer100g": 25.3, "fatPer100g": 3.7}, {"id": "noodles", "name": "نودلز", "priceAdd50": 4, "caloriesPer100g": 136.7, "proteinPer100g": 4.0, "carbsPer100g": 26.7, "fatPer100g": 1.0}, {"id": "spaghetti-tandoori", "name": "اسباغتي تندوري", "priceAdd50": 4, "caloriesPer100g": 143.3, "proteinPer100g": 4.7, "carbsPer100g": 28.7, "fatPer100g": 0.8}], "VEGETABLE": {"id": "mixed-veg", "name": "خضار مشكل", "price": 0, "caloriesPer100g": 65.0, "proteinPer100g": 2.5, "carbsPer100g": 11.5, "fatPer100g": 0.2}, "SAUCES": [{"id": "tahini", "name": "طحينة", "price": 1, "calories": 18, "protein": 0.8, "carbs": 1.0, "fat": 1.5}, {"id": "yogurt-mint", "name": "زبادي نعناع", "price": 1, "calories": 10, "protein": 0.7, "carbs": 0.8, "fat": 0.3}, {"id": "spicy", "name": "سبايسي", "price": 1, "calories": 15, "protein": 0.9, "carbs": 0.7, "fat": 0.8}], "DRINKS": [{"id": "pepsi-diet", "name": "بيبسي دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "pepsi-max", "name": "بيبسي ماكس", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-diet", "name": "سفن دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-mojito", "name": "سفن موهيتو", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "dew-diet", "name": "ديو دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "citrus-diet", "name": "حمضيات دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "water", "name": "ماء", "price": 1, "calories": 0, "protein": 0, "carbs": 0, "fat": 0}], "SANDWICHES": [{"id": "tortilla-buffalo", "name": "تورتلا دجاج بافلو", "price": 16, "calories": 400, "protein": 38, "carbs": 38, "fat": 10}, {"id": "tortilla-grilled", "name": "تورتلا دجاج مشوي", "price": 16, "calories": 360, "protein": 38, "carbs": 36, "fat": 6}, {"id": "tortilla-fajita", "name": "تورتلا دجاج فاهيتا", "price": 16, "calories": 380, "protein": 38, "carbs": 40, "fat": 7}, {"id": "tuna-toast", "name": "توست تونة", "price": 12, "calories": 300, "protein": 31, "carbs": 28, "fat": 7}, {"id": "beef-burger", "name": "برجر لحم", "price": 22, "calories": 460, "protein": 33, "carbs": 33, "fat": 20}, {"id": "crispy-chicken-burger", "name": "برجر دجاج كرسبي", "price": 22, "calories": 430, "protein": 35, "carbs": 36, "fat": 16}], "DESSERTS": [{"id": "energy-balls", "name": "كرات الطاقة", "price": 15, "calories": 231, "protein": 5, "carbs": 10, "fat": 5}, {"id": "cookies", "name": "كوكيز", "price": 7, "calories": 124, "protein": 3, "carbs": 15, "fat": 6}, {"id": "oats-dates", "name": "شوفان بالتمر", "price": 10, "calories": 195, "protein": 6, "carbs": 28, "fat": 3}, {"id": "healthy-cake", "name": "هلثي كيك", "price": 15, "calories": 215, "protein": 6, "carbs": 18, "fat": 5}, {"id": "umm-ali", "name": "أم علي", "price": 13, "calories": 210, "protein": 8, "carbs": 28, "fat": 7}, {"id": "areeka", "name": "عريكة", "price": 12, "calories": 225, "protein": 9, "carbs": 33, "fat": 7}, {"id": "basbousa-plain", "name": "بسبوسة سادة", "price": 6, "calories": 124, "protein": 5, "carbs": 23, "fat": 6}, {"id": "basbousa-cream", "name": "بسبوسة بالقشطة", "price": 8, "calories": 150, "protein": 6, "carbs": 23, "fat": 8}, {"id": "clean-treat", "name": "كلين تريت", "price": 15, "calories": 130, "protein": 7, "carbs": 13, "fat": 5}], "SALADS": [{"id": "caesar-chicken", "name": "سلطة سيزر دجاج", "price": 14, "calories": 240, "protein": 23, "carbs": 8, "fat": 13}, {"id": "greek-salad", "name": "سلطة يونانية", "price": 8, "calories": 190, "protein": 7, "carbs": 10, "fat": 15}, {"id": "arugula-salad", "name": "سلطة جرجير", "price": 8, "calories": 110, "protein": 4, "carbs": 6, "fat": 7}, {"id": "watermelon", "name": "حبحب (بطيخ)", "price": 5, "calories": 75, "protein": 1.5, "carbs": 18.7, "fat": 0.4}]};
+
+/* ============================================================
+   UI STRINGS (chrome only — catalog item names stay Arabic)
+   ============================================================ */
+const STRINGS = {
+  ar: {
+    dir:"rtl",
+    brandName:"هيلثي لايف", brandSub:"مطعم صحي",
+    heroTag:"تُحضَّر حسب اختيارك",
+    heroTitle:"كوّن وجبتك <em>المثالية</em>",
+    heroCopy:"اختر عدد الوجبات، ابنِ كل وجبة بروتين وكارب وخضار وصوص، وزوّد ساندوتشات أو سلطات أو حلا — كل شي يتحدث لحظيًا.",
+    startBuilding:"ابدأ الطلب", footerLine:"تُحضَّر طازجة، وتشاهد سعراتها أمامك.",
+    startOver:"البدء من جديد", back:"رجوع", cont:"متابعة", skip:"تخطي", reviewBtn:"مراجعة الطلب",
+    howManyMeals:"كم عدد الوجبات بهذا الطلب؟",
+    mealLabel:"وجبة", mealTypeQ:"نوع الوجبة",
+    bowlType:"ابنِ وجبتك", sandwichType:"ساندوتش/برجر",
+    beginSetup:"ابدأ التجهيز",
+    stepProteinTitle:"اختر البروتين", stepProteinHint:"تقدر تختار صنف واحد أو صنفين — الصنف الثاني يبدأ من 50 جرام.",
+    stepCarbTitle:"اختر الكارب", stepCarbHint:"وزن الكارب يوازي وزن البروتين مجانًا — أي زيادة فوقه بسعر إضافي.",
+    stepVegTitle:"الخضار المشكل", stepVegHint:"اختياري.",
+    stepSauceTitle:"اختر الصوص", stepSauceHint:"اختياري — صوص واحد أو بدون.",
+    stepSandwichTitle:"اختر الساندوتش/البرجر", stepSandwichHint:"وجبة متكاملة جاهزة.",
+    stepDessertsTitle:"حلا (اختياري)", stepDessertsHint:"زوّد على طلبك لو تحب.",
+    stepDrinksTitle:"مشروبات (اختياري)", stepDrinksHint:"زوّد على طلبك لو تحب.",
+    stepSaladsTitle:"سلطات (اختياري)", stepSaladsHint:"زوّد على طلبك لو تحب.",
+    selectLabel:"اختيار", maxTwoNote:"وصلت الحد الأقصى (صنفين) — احذف واحد لتقدر تضيف غيره.",
+    reviewTitle:"مراجعة الطلب", combinedTotal:"الإجمالي الكلي لكل الوجبات",
+    totalPrice:"السعر الإجمالي", addToOrder:"أضف إلى الطلب",
+    kcalUnit:"سعرة", protein:"بروتين", carbs:"كارب", fat:"دهون",
+    freePortion:"(منه مجاني)",
+    sendingOrder:"جارٍ إرسال الطلب…", orderError:"تعذر إرسال الطلب إلى الكاشير — يرجى المحاولة مرة أخرى.",
+    confirmTitle:"تم إرسال الطلب إلى المطبخ",
+    confirmCopy:"طلبك في الطريق. أظهر هذا الرقم عند الكاونتر لاستلامه.",
+    newMeal:"ابدأ طلب جديد",
+    langSwitchTo:"English",
+    extrasSectionTitle:"إضافات على الطلب",
+    noneSelected:"لا شي مختار",
+  },
+  en: {
+    dir:"ltr",
+    brandName:"Healthy Life", brandSub:"Healthy Kitchen",
+    heroTag:"Made to order, by you",
+    heroTitle:"Build Your <em>Perfect</em> Meal",
+    heroCopy:"Choose how many meals, build each with protein, carb, veg and sauce, and add sandwiches, salads or dessert — everything updates live.",
+    startBuilding:"Start Building", footerLine:"Freshly assembled, with calories you can see.",
+    startOver:"Start Over", back:"Back", cont:"Continue", skip:"Skip", reviewBtn:"Review Order",
+    howManyMeals:"How many meals in this order?",
+    mealLabel:"Meal", mealTypeQ:"Meal type",
+    bowlType:"Build Your Bowl", sandwichType:"Sandwich/Burger",
+    beginSetup:"Start Setup",
+    stepProteinTitle:"Choose Protein", stepProteinHint:"Pick one or two — a second item starts at 50g.",
+    stepCarbTitle:"Choose Carb", stepCarbHint:"Carb weight up to your protein weight is free — extra is charged.",
+    stepVegTitle:"Mixed Vegetables", stepVegHint:"Optional.",
+    stepSauceTitle:"Choose Sauce", stepSauceHint:"Optional — one sauce or none.",
+    stepSandwichTitle:"Choose Sandwich/Burger", stepSandwichHint:"A ready complete meal.",
+    stepDessertsTitle:"Dessert (optional)", stepDessertsHint:"Add to your order if you'd like.",
+    stepDrinksTitle:"Drinks (optional)", stepDrinksHint:"Add to your order if you'd like.",
+    stepSaladsTitle:"Salads (optional)", stepSaladsHint:"Add to your order if you'd like.",
+    selectLabel:"Select", maxTwoNote:"You've reached the limit (2) — remove one to add another.",
+    reviewTitle:"Review Order", combinedTotal:"Combined total for all meals",
+    totalPrice:"Total Price", addToOrder:"Add to Order",
+    kcalUnit:"kcal", protein:"Protein", carbs:"Carbs", fat:"Fat",
+    freePortion:"(free portion)",
+    sendingOrder:"Sending order…", orderError:"Couldn't send the order to the till — please try again.",
+    confirmTitle:"Order Sent to the Kitchen",
+    confirmCopy:"Your order is on its way. Show this number at the counter.",
+    newMeal:"Start a New Order",
+    langSwitchTo:"عربي",
+    extrasSectionTitle:"Add to your order",
+    noneSelected:"Nothing selected",
+  },
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  lang: "ar",
+  screen: "landing",     // landing | setup | wizard | extras | review | confirm
+  mealCount: 0,
+  mealTypes: [],          // 'bowl' | 'sandwich'
+  meals: [],
+  currentMeal: 0,
+  currentStep: 0,
+  extrasStep: 0,
+  activeProteinCategory: MENU.PROTEIN_CATEGORIES[0].key,
+};
+
+const BOWL_STEPS = ["protein","carb","vegetable","sauce"];
+const SANDWICH_STEPS = ["sandwich"];
+const EXTRAS_STEPS = ["salads","desserts","drinks"];
+
+function t(){ return STRINGS[state.lang]; }
+function el(sel){ return document.querySelector(sel); }
+function els(sel){ return Array.from(document.querySelectorAll(sel)); }
+
+function makeMeal(type){
+  return type === "bowl"
+    ? { type:"bowl", protein:{items:[]}, carb:{items:[]}, vegetable:{grams:0}, sauce:null }
+    : { type:"sandwich", sandwichId:null };
+}
+
+/* ============================================================
+   LOOKUPS
+   ============================================================ */
+function findProteinCategory(key){ return MENU.PROTEIN_CATEGORIES.find(c=>c.key===key); }
+function findProteinItem(categoryKey, id){
+  const cat = findProteinCategory(categoryKey);
+  return cat ? cat.items.find(i=>i.id===id) : null;
+}
+function findCarb(id){ return MENU.CARB_ITEMS.find(c=>c.id===id); }
+function findSauce(id){ return MENU.SAUCES.find(s=>s.id===id); }
+function findDrink(id){ return MENU.DRINKS.find(d=>d.id===id); }
+function findDessert(id){ return MENU.DESSERTS.find(d=>d.id===id); }
+function findSandwich(id){ return MENU.SANDWICHES.find(s=>s.id===id); }
+
+function zeroTotals(){ return {calories:0,protein:0,carbs:0,fat:0,price:0}; }
+function addTotals(a,b){
+  return {
+    calories:a.calories+b.calories, protein:a.protein+b.protein,
+    carbs:a.carbs+b.carbs, fat:a.fat+b.fat, price:a.price+b.price,
+  };
+}
+
+/* ============================================================
+   CALCULATIONS
+   ============================================================ */
+function proteinItemPrice(entry, role){
+  const cat = findProteinCategory(entry.categoryKey);
+  if (role === 0){
+    const extra = Math.max(0, entry.grams - 100);
+    return cat.priceBase100 + (extra/50)*cat.priceAdd50;
+  }
+  return (entry.grams/50)*cat.priceAdd50;
+}
+function proteinItemNutrition(entry){
+  const item = findProteinItem(entry.categoryKey, entry.id);
+  const scale = entry.grams/100;
+  return {
+    calories:item.caloriesPer100g*scale, protein:item.proteinPer100g*scale,
+    carbs:item.carbsPer100g*scale, fat:item.fatPer100g*scale,
+  };
+}
+function calcProteinTotals(meal){
+  let total = zeroTotals();
+  meal.protein.items.forEach((entry, idx)=>{
+    const n = proteinItemNutrition(entry);
+    total = addTotals(total, {...n, price: proteinItemPrice(entry, idx)});
+  });
+  return total;
+}
+function proteinGramsSum(meal){
+  return meal.protein.items.reduce((s,e)=>s+e.grams,0);
+}
+
+function calcCarbTotals(meal, proteinGrams){
+  let remaining = proteinGrams;
+  let total = zeroTotals();
+  meal.carb.items.forEach(entry=>{
+    const item = findCarb(entry.id);
+    const scale = entry.grams/100;
+    const free = Math.min(entry.grams, remaining);
+    const paid = entry.grams - free;
+    remaining -= free;
+    const price = (paid/50)*item.priceAdd50;
+    total = addTotals(total, {
+      calories:item.caloriesPer100g*scale, protein:item.proteinPer100g*scale,
+      carbs:item.carbsPer100g*scale, fat:item.fatPer100g*scale, price,
+    });
+  });
+  return total;
+}
+
+function calcVegTotals(meal){
+  if (!meal.vegetable.grams) return zeroTotals();
+  const v = MENU.VEGETABLE;
+  const scale = meal.vegetable.grams/100;
+  return { calories:v.caloriesPer100g*scale, protein:v.proteinPer100g*scale,
+    carbs:v.carbsPer100g*scale, fat:v.fatPer100g*scale, price:(v.price||0)*scale };
+}
+
+function calcSauceTotals(meal){
+  if (!meal.sauce) return zeroTotals();
+  const s = findSauce(meal.sauce);
+  return { calories:s.calories, protein:s.protein, carbs:s.carbs, fat:s.fat, price:s.price };
+}
+
+function calcMealTotals(meal){
+  if (meal.type === "sandwich"){
+    if (!meal.sandwichId) return zeroTotals();
+    const s = findSandwich(meal.sandwichId);
+    return { calories:s.calories, protein:s.protein, carbs:s.carbs, fat:s.fat, price:s.price };
+  }
+  const proteinGrams = proteinGramsSum(meal);
+  let total = calcProteinTotals(meal);
+  total = addTotals(total, calcCarbTotals(meal, proteinGrams));
+  total = addTotals(total, calcVegTotals(meal));
+  total = addTotals(total, calcSauceTotals(meal));
+  return total;
+}
+
+function calcExtrasTotals(){
+  let total = zeroTotals();
+  Object.entries(state.extras.salads).forEach(([id,qty])=>{
+    if (qty<=0) return;
+    const d = MENU.SALADS.find(x=>x.id===id);
+    total = addTotals(total, { calories:d.calories*qty, protein:d.protein*qty, carbs:d.carbs*qty, fat:d.fat*qty, price:d.price*qty });
+  });
+  Object.entries(state.extras.desserts).forEach(([id,qty])=>{
+    if (qty<=0) return;
+    const d = findDessert(id);
+    total = addTotals(total, { calories:d.calories*qty, protein:d.protein*qty, carbs:d.carbs*qty, fat:d.fat*qty, price:d.price*qty });
+  });
+  Object.entries(state.extras.drinks).forEach(([id,qty])=>{
+    if (qty<=0) return;
+    const d = findDrink(id);
+    total = addTotals(total, { calories:d.calories*qty, protein:d.protein*qty, carbs:d.carbs*qty, fat:d.fat*qty, price:d.price*qty });
+  });
+  return total;
+}
+
+function calcGrandTotals(){
+  let total = zeroTotals();
+  state.meals.forEach(m=>{ total = addTotals(total, calcMealTotals(m)); });
+  total = addTotals(total, calcExtrasTotals());
+  return total;
+}
+
+/* ============================================================
+   FORMAT HELPERS
+   ============================================================ */
+function fmtG(n){ return Math.round(n)+"g"; }
+function fmtPrice(n){ return CONFIG.currency+" "+(Math.round(n*10)/10).toFixed(2).replace(/\.00$/,""); }
+function r1(n){ return Math.round(n*10)/10; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function startSetup(){
+  state.screen = "setup";
+  state.mealCount = 0;
+  state.mealTypes = [];
+  state.meals = [];
+  state.extras = { salads:{}, desserts:{}, drinks:{} };
+  render();
+}
+
+function chooseMealCount(n){
+  state.mealCount = n;
+  state.mealTypes = new Array(n).fill(null);
+  render();
+}
+
+function chooseMealType(idx, type){
+  state.mealTypes[idx] = type;
+  render();
+}
+
+function beginWizard(){
+  if (state.mealCount < 1) return;
+  if (state.mealTypes.slice(0, state.mealCount).some(x=>!x)) return;
+  state.meals = state.mealTypes.map(type=>makeMeal(type));
+  state.currentMeal = 0;
+  state.currentStep = 0;
+  state.screen = "wizard";
+  render();
+}
+
+function currentMealObj(){ return state.meals[state.currentMeal]; }
+function currentStepsForMeal(){ return currentMealObj().type === "bowl" ? BOWL_STEPS : SANDWICH_STEPS; }
+
+function stepIsRequired(stepKey){
+  return stepKey === "protein" || stepKey === "sandwich";
+}
+function stepHasSelection(meal, stepKey){
+  if (stepKey === "protein") return meal.protein.items.length > 0;
+  if (stepKey === "carb") return meal.carb.items.length > 0;
+  if (stepKey === "vegetable") return meal.vegetable.grams > 0;
+  if (stepKey === "sauce") return !!meal.sauce;
+  if (stepKey === "sandwich") return !!meal.sandwichId;
+  return true;
+}
+
+function goNext(){
+  if (state.screen === "wizard"){
+    const steps = currentStepsForMeal();
+    const key = steps[state.currentStep];
+    const meal = currentMealObj();
+    if (stepIsRequired(key) && !stepHasSelection(meal, key)){
+      showWizardWarning();
+      return;
+    }
+    if (state.currentStep < steps.length-1){
+      state.currentStep++;
+    } else if (state.currentMeal < state.mealCount-1){
+      state.currentMeal++;
+      state.currentStep = 0;
+    } else {
+      state.screen = "extras";
+      state.extrasStep = 0;
+    }
+    render();
+  } else if (state.screen === "extras"){
+    if (state.extrasStep < EXTRAS_STEPS.length-1){
+      state.extrasStep++;
+    } else {
+      state.screen = "review";
+    }
+    render();
+  }
+}
+
+function goPrev(){
+  if (state.screen === "wizard"){
+    if (state.currentStep > 0){
+      state.currentStep--;
+    } else if (state.currentMeal > 0){
+      state.currentMeal--;
+      state.currentStep = currentStepsForMeal().length-1;
+    } else {
+      state.screen = "setup";
+    }
+    render();
+  } else if (state.screen === "extras"){
+    if (state.extrasStep > 0){
+      state.extrasStep--;
+    } else {
+      state.currentMeal = state.mealCount-1;
+      state.screen = "wizard";
+      state.currentStep = currentStepsForMeal().length-1;
+    }
+    render();
+  } else if (state.screen === "review"){
+    state.screen = "extras";
+    state.extrasStep = EXTRAS_STEPS.length-1;
+    render();
+  }
+}
+
+function showWizardWarning(){
+  const box = el("#wizard-warning");
+  if (box) box.classList.add("show");
+}
+
+/* ============================================================
+   SELECTION ACTIONS
+   ============================================================ */
+function selectProteinItem(categoryKey, itemId){
+  const meal = currentMealObj();
+  const items = meal.protein.items;
+  if (items.find(e=>e.id===itemId)) return;
+  if (items.length >= 2){ flashLimitNote(); return; }
+  const role = items.length;
+  items.push({ categoryKey, id:itemId, grams: role===0?100:50 });
+  render();
+}
+function adjustProteinGrams(itemId, delta){
+  const meal = currentMealObj();
+  const items = meal.protein.items;
+  const idx = items.findIndex(e=>e.id===itemId);
+  if (idx<0) return;
+  const floor = idx===0 ? 100 : 50;
+  items[idx].grams = Math.max(floor, Math.min(600, items[idx].grams+delta));
+  render();
+}
+function removeProteinItem(itemId){
+  const meal = currentMealObj();
+  meal.protein.items = meal.protein.items.filter(e=>e.id!==itemId);
+  render();
+}
+
+function selectCarbItem(itemId){
+  const meal = currentMealObj();
+  const items = meal.carb.items;
+  if (items.find(e=>e.id===itemId)) return;
+  if (items.length >= 2){ flashLimitNote(); return; }
+  const role = items.length;
+  items.push({ id:itemId, grams: role===0?100:50 });
+  render();
+}
+function adjustCarbGrams(itemId, delta){
+  const meal = currentMealObj();
+  const items = meal.carb.items;
+  const idx = items.findIndex(e=>e.id===itemId);
+  if (idx<0) return;
+  const next = items[idx].grams + delta;
+  if (next <= 0){ items.splice(idx,1); }
+  else { items[idx].grams = Math.min(600, next); }
+  render();
+}
+
+function adjustVegGrams(delta){
+  const meal = currentMealObj();
+  const next = meal.vegetable.grams + delta;
+  meal.vegetable.grams = Math.max(0, Math.min(400, next===50&&delta>0&&meal.vegetable.grams===0?100:next));
+  render();
+}
+function toggleVeg(){
+  const meal = currentMealObj();
+  meal.vegetable.grams = meal.vegetable.grams>0 ? 0 : 100;
+  render();
+}
+
+function toggleSauce(id){
+  const meal = currentMealObj();
+  meal.sauce = meal.sauce===id ? null : id;
+  render();
+}
+
+function selectSandwich(id){
+  currentMealObj().sandwichId = id;
+  render();
+}
+
+function flashLimitNote(){
+  const note = el("#limit-note");
+  if (note){ note.classList.add("show"); setTimeout(()=>note && note.classList.remove("show"), 2000); }
+}
+
+function adjustExtraQty(group, id, delta){
+  const bag = state.extras[group];
+  const next = (bag[id]||0)+delta;
+  if (next<=0) delete bag[id]; else bag[id]=Math.min(10,next);
+  render();
+}
+
+/* ============================================================
+   RENDER: LANDING
+   ============================================================ */
+function applyLanguage(){
+  const s = t();
+  document.documentElement.lang = state.lang;
+  document.documentElement.dir = s.dir;
+  el("#brand-name").textContent = s.brandName;
+  el("#brand-sub").textContent = s.brandSub;
+  el("#hero-tag").textContent = s.heroTag;
+  el("#hero-title").innerHTML = s.heroTitle;
+  el("#hero-copy").textContent = s.heroCopy;
+  el("#hero-cta-label").textContent = s.startBuilding;
+  el("#footer-line").textContent = s.footerLine;
+  els(".lang-toggle-btn").forEach(b=>b.textContent = s.langSwitchTo);
+}
+function toggleLanguage(){
+  state.lang = state.lang==="ar" ? "en" : "ar";
+  applyLanguage();
+  render();
+}
+
+/* ============================================================
+   RENDER: APP SHELL (setup / wizard / extras / review)
+   ============================================================ */
+function headerTitle(){
+  const s = t();
+  if (state.screen==="setup") return s.howManyMeals;
+  if (state.screen==="wizard") return `${s.mealLabel} ${state.currentMeal+1}/${state.mealCount}`;
+  if (state.screen==="extras") return s.extrasSectionTitle;
+  if (state.screen==="review") return s.reviewTitle;
+  return "";
+}
+
+function renderAppShell(){
+  const s = t();
+  const root = el("#flow-root");
+  root.innerHTML = `
+    <header class="app-header">
+      <div class="app-header-row">
+        <div class="header-left">
+          <button class="icon-btn" id="btn-shell-back" aria-label="back">
+            <svg class="flip-rtl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div class="header-title"><strong>${headerTitle()}</strong></div>
+        </div>
+        <div class="header-right">
+          <button class="chip-btn lang-toggle-btn" id="btn-lang-shell">${s.langSwitchTo}</button>
+          <button class="chip-btn" id="btn-shell-reset">${s.startOver}</button>
+        </div>
+      </div>
+    </header>
+    <main class="app-main" id="app-main"></main>
+    <div class="summary-bar" id="summary-bar"></div>
+  `;
+  el("#btn-shell-back").addEventListener("click", ()=>{
+    if (state.screen==="setup"){ state.screen="landing"; render(); }
+    else goPrev();
+  });
+  el("#btn-shell-reset").addEventListener("click", ()=>{
+    if (confirm(state.lang==="ar" ? "تبدأ من جديد؟ راح يمسح طلبك الحالي." : "Start over? This clears your current order.")){
+      state.screen = "landing";
+      render();
+    }
+  });
+  el("#btn-lang-shell").addEventListener("click", toggleLanguage);
+
+  renderMain();
+  renderSummaryBar();
+}
+
+function renderSummaryBar(){
+  const s = t();
+  const bar = el("#summary-bar");
+  if (state.screen==="confirm" || state.screen==="landing" || state.screen==="setup"){
+    bar.style.display="none"; return;
+  }
+  bar.style.display="flex";
+  const totals = calcGrandTotals();
+  bar.innerHTML = `
+    <div class="summary-kcal">${Math.round(totals.calories)}<span> ${s.kcalUnit}</span></div>
+    <div class="summary-price">${fmtPrice(totals.price)}</div>
+  `;
+}
+
+function renderMain(){
+  const main = el("#app-main");
+  if (state.screen==="setup") return renderSetup(main);
+  if (state.screen==="wizard") return renderWizard(main);
+  if (state.screen==="extras") return renderExtras(main);
+  if (state.screen==="review") return renderReview(main);
+}
+
+/* ---------- SETUP ---------- */
+function renderSetup(main){
+  const s = t();
+  let html = `<div class="section-head"><div class="section-title">${s.howManyMeals}</div></div>`;
+  html += `<div class="tile-grid">`;
+  [1,2,3].forEach(n=>{
+    html += `<button class="tile ${state.mealCount===n?"selected":""}" data-count="${n}">${n}</button>`;
+  });
+  html += `</div>`;
+
+  if (state.mealCount>0){
+    for (let i=0;i<state.mealCount;i++){
+      html += `<div class="meal-setup-block">
+        <h3>${s.mealLabel} ${i+1} — ${s.mealTypeQ}</h3>
+        <div class="tile-grid">
+          <button class="tile ${state.mealTypes[i]==="bowl"?"selected":""}" data-meal-idx="${i}" data-meal-type="bowl">${s.bowlType}</button>
+          <button class="tile ${state.mealTypes[i]==="sandwich"?"selected":""}" data-meal-idx="${i}" data-meal-type="sandwich">${s.sandwichType}</button>
+        </div>
+      </div>`;
+    }
+    const ready = state.mealTypes.slice(0,state.mealCount).every(x=>x);
+    html += `<div class="step-nav"><button class="nav-btn primary wide" id="btn-begin-setup" ${ready?"":"disabled"}>${s.beginSetup}</button></div>`;
+  }
+  main.innerHTML = html;
+
+  els("[data-count]").forEach(b=>b.addEventListener("click",()=>chooseMealCount(Number(b.dataset.count))));
+  els("[data-meal-type]").forEach(b=>b.addEventListener("click",()=>chooseMealType(Number(b.dataset.mealIdx), b.dataset.mealType)));
+  const beginBtn = el("#btn-begin-setup");
+  if (beginBtn) beginBtn.addEventListener("click", beginWizard);
+}
+
+/* ---------- WIZARD ---------- */
+function renderWizard(main){
+  const s = t();
+  const meal = currentMealObj();
+  const stepKey = currentStepsForMeal()[state.currentStep];
+  let body = "";
+  if (stepKey==="protein") body = renderProteinStep(meal);
+  else if (stepKey==="carb") body = renderCarbStep(meal);
+  else if (stepKey==="vegetable") body = renderVegStep(meal);
+  else if (stepKey==="sauce") body = renderSauceStep(meal);
+  else if (stepKey==="sandwich") body = renderSandwichStep(meal);
+
+  const steps = currentStepsForMeal();
+  const isLastStepOfLastMeal = state.currentStep===steps.length-1 && state.currentMeal===state.mealCount-1;
+  const required = stepIsRequired(stepKey);
+  const hasSel = stepHasSelection(meal, stepKey);
+  const nextLabel = isLastStepOfLastMeal ? s.reviewBtn : ((!required && !hasSel) ? s.skip : s.cont);
+
+  main.innerHTML = `
+    ${body}
+    <div class="inline-warning" id="wizard-warning" style="display:none">
+      <span>${state.lang==="ar" ? "لازم تختار عشان تكمل." : "Please make a selection to continue."}</span>
+    </div>
+    <div class="step-nav">
+      <button class="nav-btn ghost" id="btn-wizard-prev">${s.back}</button>
+      <button class="nav-btn primary wide ${(!required&&!hasSel)?"is-skip":""}" id="btn-wizard-next">${nextLabel}</button>
+    </div>
+  `;
+  const warn = el("#wizard-warning");
+  if (warn){ warn.style.display="none"; warn.classList.remove("show");
+    const obs = ()=>{ if(warn.classList.contains("show")) warn.style.display="flex"; };
+    new MutationObserver(obs).observe(warn,{attributes:true}); }
+  el("#btn-wizard-prev").addEventListener("click", goPrev);
+  el("#btn-wizard-next").addEventListener("click", goNext);
+}
+
+function catColor(key){
+  const map = { chicken:"#C98F55", meat:"#C7A93F", fish:"#6FA466", salmon:"#5C93B0", shrimp:"#B0708F" };
+  return map[key] || "var(--line)";
+}
+function thumbHtml(id, wide){
+  return `<div class="item-thumb${wide?" wide":""}"><img src="images/${id}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>`;
+}
+
+function renderProteinStep(meal){
+  const s = t();
+  const items = meal.protein.items;
+  let html = `<div class="section-head"><div class="section-kicker">${s.stepProteinTitle}</div>
+    <div class="section-title">${s.stepProteinTitle}</div>
+    <div class="section-hint">${s.stepProteinHint}</div></div>`;
+
+  if (items.length>=2) html += `<div class="limit-note show" id="limit-note">${s.maxTwoNote}</div>`;
+  else html += `<div class="limit-note" id="limit-note" style="display:none">${s.maxTwoNote}</div>`;
+
+  html += `<div class="cat-row">`;
+  MENU.PROTEIN_CATEGORIES.forEach(cat=>{
+    html += `<button class="cat-chip ${state.activeProteinCategory===cat.key?"active":""}" data-cat="${cat.key}">${cat.name}</button>`;
+  });
+  html += `</div>`;
+
+  const cat = findProteinCategory(state.activeProteinCategory);
+  html += `<div class="card-grid">`;
+  cat.items.forEach(item=>{
+    const entryIdx = items.findIndex(e=>e.id===item.id && e.categoryKey===cat.key);
+    const selected = entryIdx>=0;
+    html += `<div class="item-card ${selected?"selected":""}" style="--cat-color:${catColor(cat.key)}">
+      ${selected?`<span class="role-badge">${entryIdx===0?"1":"2"}</span><button class="remove-x" data-remove-protein="${item.id}">✕</button>`:""}
+      ${thumbHtml(item.id)}
+      <div class="item-name">${item.name}</div>
+      <div class="item-meta">${Math.round(item.caloriesPer100g)} ${s.kcalUnit}/100g</div>
+      ${selected
+        ? qtyRowHtml(items[entryIdx].grams, `data-protein-id="${item.id}"`, entryIdx===0?100:50, 600)
+        : `<button class="select-btn" data-select-protein="${cat.key}|${item.id}">${s.selectLabel}</button>`}
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function qtyRowHtml(grams, dataAttr, min, max){
+  const atMin = grams<=min, atMax = grams>=max;
+  return `<div class="qty-row">
+    <button class="qty-btn" ${dataAttr} data-qty="-1" ${atMin?"disabled":""}>−</button>
+    <span class="qty-value">${fmtG(grams)}</span>
+    <button class="qty-btn" ${dataAttr} data-qty="1" ${atMax?"disabled":""}>+</button>
+  </div>`;
+}
+
+function renderCarbStep(meal){
+  const s = t();
+  const items = meal.carb.items;
+  const allowance = proteinGramsSum(meal);
+  let html = `<div class="section-head"><div class="section-kicker">${s.stepCarbTitle}</div>
+    <div class="section-title">${s.stepCarbTitle}</div>
+    <div class="section-hint">${s.stepCarbHint} (${state.lang==="ar"?"الرصيد المجاني":"free allowance"}: ${fmtG(allowance)})</div></div>`;
+
+  if (items.length>=2) html += `<div class="limit-note show" id="limit-note">${s.maxTwoNote}</div>`;
+  else html += `<div class="limit-note" id="limit-note" style="display:none">${s.maxTwoNote}</div>`;
+
+  html += `<div class="card-grid">`;
+  MENU.CARB_ITEMS.forEach(item=>{
+    const entryIdx = items.findIndex(e=>e.id===item.id);
+    const selected = entryIdx>=0;
+    html += `<div class="item-card ${selected?"selected":""}" style="--cat-color:#C7A93F">
+      ${selected?`<span class="role-badge">${entryIdx===0?"1":"2"}</span>`:""}
+      ${thumbHtml(item.id)}
+      <div class="item-name">${item.name}</div>
+      <div class="item-meta">+50g: ${fmtPrice(item.priceAdd50)}</div>
+      ${selected
+        ? qtyRowHtml(items[entryIdx].grams, `data-carb-id="${item.id}"`, 0, 600)
+        : `<button class="select-btn" data-select-carb="${item.id}">${s.selectLabel}</button>`}
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderVegStep(meal){
+  const s = t();
+  const v = MENU.VEGETABLE;
+  const grams = meal.vegetable.grams;
+  let html = `<div class="section-head"><div class="section-kicker">${s.stepVegTitle}</div>
+    <div class="section-title">${s.stepVegTitle}</div><div class="section-hint">${s.stepVegHint}</div></div>`;
+  html += `<div class="card-grid"><div class="item-card ${grams>0?"selected":""}" style="--cat-color:#6FA466">
+    ${thumbHtml(v.id)}
+    <div class="item-name">${v.name}</div>
+    <div class="item-meta">${Math.round(v.caloriesPer100g)} ${s.kcalUnit}/100g</div>
+    ${grams>0
+      ? qtyRowHtml(grams, `data-veg="1"`, 0, 400)
+      : `<button class="select-btn" data-veg-select="1">${s.selectLabel}</button>`}
+  </div></div>`;
+  return html;
+}
+
+function renderSauceStep(meal){
+  const s = t();
+  let html = `<div class="section-head"><div class="section-kicker">${s.stepSauceTitle}</div>
+    <div class="section-title">${s.stepSauceTitle}</div><div class="section-hint">${s.stepSauceHint}</div></div>`;
+  html += `<div class="flat-grid">`;
+  MENU.SAUCES.forEach(sa=>{
+    const selected = meal.sauce===sa.id;
+    html += `<button class="flat-card ${selected?"selected":""}" data-sauce="${sa.id}">
+      ${thumbHtml(sa.id, true)}
+      <div class="flat-name">${sa.name}</div>
+      <div class="flat-meta">${fmtPrice(sa.price)} · ${Math.round(sa.calories)} ${s.kcalUnit}</div>
+    </button>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderSandwichStep(meal){
+  const s = t();
+  let html = `<div class="section-head"><div class="section-kicker">${s.stepSandwichTitle}</div>
+    <div class="section-title">${s.stepSandwichTitle}</div><div class="section-hint">${s.stepSandwichHint}</div></div>`;
+  html += `<div class="flat-grid">`;
+  MENU.SANDWICHES.forEach(sw=>{
+    const selected = meal.sandwichId===sw.id;
+    html += `<button class="flat-card ${selected?"selected":""}" data-sandwich="${sw.id}">
+      ${thumbHtml(sw.id, true)}
+      <div class="flat-name">${sw.name}</div>
+      <div class="flat-meta">${fmtPrice(sw.price)} · ${Math.round(sw.calories)} ${s.kcalUnit}</div>
+    </button>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+/* ---------- EXTRAS ---------- */
+function extrasListFor(key){
+  if (key==="salads") return MENU.SALADS;
+  if (key==="desserts") return MENU.DESSERTS;
+  return MENU.DRINKS;
+}
+function extrasTitleFor(key, s){
+  if (key==="salads") return [s.stepSaladsTitle, s.stepSaladsHint];
+  if (key==="desserts") return [s.stepDessertsTitle, s.stepDessertsHint];
+  return [s.stepDrinksTitle, s.stepDrinksHint];
+}
+function renderExtras(main){
+  const s = t();
+  const key = EXTRAS_STEPS[state.extrasStep];
+  const list = extrasListFor(key);
+  const bag = state.extras[key];
+  const [title, hint] = extrasTitleFor(key, s);
+
+  let html = `<div class="section-head"><div class="section-title">${title}</div><div class="section-hint">${hint}</div></div>`;
+  html += `<div class="card-grid">`;
+  list.forEach(it=>{
+    const qty = bag[it.id]||0;
+    html += `<div class="item-card ${qty>0?"selected":""}" style="--cat-color:var(--accent)">
+      ${thumbHtml(it.id)}
+      <div class="item-name">${it.name}</div>
+      <div class="item-meta">${fmtPrice(it.price)}${it.calories?` · ${Math.round(it.calories)} ${s.kcalUnit}`:""}</div>
+      ${qty>0
+        ? `<div class="qty-row"><button class="qty-btn" data-extra-group="${key}" data-extra-id="${it.id}" data-qty="-1">−</button><span class="qty-value">×${qty}</span><button class="qty-btn" data-extra-group="${key}" data-extra-id="${it.id}" data-qty="1" ${qty>=10?"disabled":""}>+</button></div>`
+        : `<button class="select-btn" data-extra-add="${key}|${it.id}">${s.selectLabel}</button>`}
+    </div>`;
+  });
+  html += `</div>
+    <div class="step-nav">
+      <button class="nav-btn ghost" id="btn-wizard-prev">${s.back}</button>
+      <button class="nav-btn primary wide" id="btn-wizard-next">${state.extrasStep===EXTRAS_STEPS.length-1 ? s.reviewBtn : s.cont}</button>
+    </div>`;
+  main.innerHTML = html;
+  el("#btn-wizard-prev").addEventListener("click", goPrev);
+  el("#btn-wizard-next").addEventListener("click", goNext);
+}
+
+/* ---------- REVIEW ---------- */
+function donutSegments(totals){
+  const pCal = totals.protein*4, cCal = totals.carbs*4, fCal = totals.fat*9;
+  const totalCal = pCal+cCal+fCal;
+  if (totalCal<=0) return [{color:"#D8D2C2", val:1}];
+  return [
+    {color:"#2F6B33", val:cCal},
+    {color:"#8A5E1E", val:pCal},
+    {color:"#C68B6E", val:fCal},
+  ];
+}
+function donutBlockHtml(totals, size, textColor){
+  const strokeW = Math.max(8, Math.round(size*0.13));
+  const radius = size/2 - strokeW/2;
+  const circumference = 2*Math.PI*radius;
+  const segs = donutSegments(totals);
+  const totalVal = segs.reduce((a,b)=>a+b.val,0);
+  let cumulative = 0;
+  const circles = segs.map(seg=>{
+    const frac = seg.val/totalVal;
+    const len = frac*circumference;
+    const dasharray = `${len} ${circumference-len}`;
+    const dashoffset = -cumulative;
+    cumulative += len;
+    return `<circle cx="${size/2}" cy="${size/2}" r="${radius}" fill="none" stroke="${seg.color}" stroke-width="${strokeW}" stroke-dasharray="${dasharray}" stroke-dashoffset="${dashoffset}" transform="rotate(-90 ${size/2} ${size/2})"/>`;
+  }).join("");
+  return `<div class="donut-wrap" style="width:${size}px;height:${size}px;color:${textColor}">
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${circles}</svg>
+    <div class="donut-center"><strong style="font-size:${Math.round(size*0.2)}px">${Math.round(totals.calories)}</strong><span style="font-size:${Math.round(size*0.1)}px">${t().kcalUnit}</span></div>
+  </div>`;
+}
+function macroLegendHtml(totals, s, textColor, dotBorder){
+  const row = (color,label,val)=>`<div><span class="dot" style="background:${color}${dotBorder?`;border:1px solid ${dotBorder}`:""}"></span>${label} ${fmtG(val)}</div>`;
+  return `<div class="macro-legend" style="color:${textColor||"var(--ink)"}">
+    ${row("#2F6B33", s.carbs, totals.carbs)}
+    ${row("#8A5E1E", s.protein, totals.protein)}
+    ${row("#C68B6E", s.fat, totals.fat)}
+  </div>`;
+}
+
+function mealLineItems(meal, s){
+  const lines = [];
+  if (meal.type==="sandwich"){
+    if (meal.sandwichId){ const sw = findSandwich(meal.sandwichId); lines.push(sw.name); }
+    return lines;
+  }
+  meal.protein.items.forEach(e=>{ const it=findProteinItem(e.categoryKey,e.id); lines.push(`${it.name} — ${fmtG(e.grams)}`); });
+  const allowance = proteinGramsSum(meal);
+  let remaining = allowance;
+  meal.carb.items.forEach(e=>{
+    const it=findCarb(e.id);
+    const free = Math.min(e.grams, remaining); remaining -= free;
+    const paidNote = free>0 ? ` ${s.freePortion} ${fmtG(free)}` : "";
+    lines.push(`${it.name} — ${fmtG(e.grams)}${paidNote}`);
+  });
+  if (meal.vegetable.grams>0) lines.push(`${MENU.VEGETABLE.name} — ${fmtG(meal.vegetable.grams)}`);
+  if (meal.sauce) lines.push(findSauce(meal.sauce).name);
+  return lines;
+}
+
+function renderReview(main){
+  const s = t();
+  let html = `<div class="section-head"><div class="section-title">${s.reviewTitle}</div></div>`;
+
+  state.meals.forEach((meal,i)=>{
+    const totals = calcMealTotals(meal);
+    const lines = mealLineItems(meal, s);
+    html += `<div class="meal-review-card">
+      <div class="meal-review-head"><h3>${s.mealLabel} ${i+1}</h3><strong>${fmtPrice(totals.price)}</strong></div>
+      <div class="meal-review-nutrition">
+        ${donutBlockHtml(totals, 72, "var(--mint-ink)")}
+        ${macroLegendHtml(totals, s, "var(--mint-ink)")}
+      </div>
+      <div class="meal-review-lines">${lines.length? lines.join("<br>") : s.noneSelected}</div>
+    </div>`;
+  });
+
+  const saladLines = Object.entries(state.extras.salads).filter(([,q])=>q>0).map(([id,q])=>`${MENU.SALADS.find(x=>x.id===id).name} ×${q}`);
+  const dessertLines = Object.entries(state.extras.desserts).filter(([,q])=>q>0).map(([id,q])=>`${findDessert(id).name} ×${q}`);
+  const drinkLines = Object.entries(state.extras.drinks).filter(([,q])=>q>0).map(([id,q])=>`${findDrink(id).name} ×${q}`);
+  if (saladLines.length || dessertLines.length || drinkLines.length){
+    const extrasTotals = calcExtrasTotals();
+    html += `<div class="meal-review-card">
+      <div class="meal-review-head"><h3>${s.extrasSectionTitle}</h3><strong>${fmtPrice(extrasTotals.price)}</strong></div>
+      <div class="meal-review-lines">${[...saladLines,...dessertLines,...drinkLines].join("<br>")}</div>
+    </div>`;
+  }
+
+  const grand = calcGrandTotals();
+  html += `<div class="grand-box">
+    <div class="grand-box-row">
+      ${donutBlockHtml(grand, 140, "#F4F1E6")}
+      ${macroLegendHtml(grand, s, "#F4F1E6", "rgba(255,255,255,.4)")}
+    </div>
+    <div class="grand-title">${s.combinedTotal}</div>
+    <div class="grand-price"><span>${s.totalPrice}</span><span class="grand-price-value">${fmtPrice(grand.price)}</span></div>
+  </div>`;
+
+  html += `<button class="add-order-btn" id="btn-add-order">${s.addToOrder}</button>
+    <div class="inline-warning" id="order-error" style="display:none"><span id="order-error-text"></span></div>
+    <div class="step-nav"><button class="nav-btn ghost" id="btn-wizard-prev">${s.back}</button></div>`;
+
+  main.innerHTML = html;
+  el("#btn-wizard-prev").addEventListener("click", goPrev);
+  el("#btn-add-order").addEventListener("click", placeOrder);
+}
+
+/* ============================================================
+   EVENT DELEGATION (dynamic content)
+   ============================================================ */
+document.addEventListener("click", (e)=>{
+  const t1 = e.target.closest("[data-cat]");
+  if (t1){ state.activeProteinCategory = t1.dataset.cat; render(); return; }
+
+  const selProtein = e.target.closest("[data-select-protein]");
+  if (selProtein){ const [cat,id] = selProtein.dataset.selectProtein.split("|"); selectProteinItem(cat,id); return; }
+
+  const remProtein = e.target.closest("[data-remove-protein]");
+  if (remProtein){ removeProteinItem(remProtein.dataset.removeProtein); return; }
+
+  const qtyProtein = e.target.closest("[data-protein-id]");
+  if (qtyProtein){ adjustProteinGrams(qtyProtein.dataset.proteinId, Number(qtyProtein.dataset.qty)*50); return; }
+
+  const selCarb = e.target.closest("[data-select-carb]");
+  if (selCarb){ selectCarbItem(selCarb.dataset.selectCarb); return; }
+
+  const qtyCarb = e.target.closest("[data-carb-id]");
+  if (qtyCarb){ adjustCarbGrams(qtyCarb.dataset.carbId, Number(qtyCarb.dataset.qty)*50); return; }
+
+  const vegSelect = e.target.closest("[data-veg-select]");
+  if (vegSelect){ toggleVeg(); return; }
+
+  const vegQty = e.target.closest("[data-veg]");
+  if (vegQty){
+    const delta = Number(vegQty.dataset.qty)*50;
+    const meal = currentMealObj();
+    const next = meal.vegetable.grams + delta;
+    meal.vegetable.grams = next<=0 ? 0 : Math.min(400,next);
+    render(); return;
+  }
+
+  const sauceBtn = e.target.closest("[data-sauce]");
+  if (sauceBtn){ toggleSauce(sauceBtn.dataset.sauce); return; }
+
+  const sandwichBtn = e.target.closest("[data-sandwich]");
+  if (sandwichBtn){ selectSandwich(sandwichBtn.dataset.sandwich); return; }
+
+  const extraAdd = e.target.closest("[data-extra-add]");
+  if (extraAdd){ const [group,id] = extraAdd.dataset.extraAdd.split("|"); adjustExtraQty(group,id,1); return; }
+
+  const extraQty = e.target.closest("[data-extra-group]");
+  if (extraQty){ adjustExtraQty(extraQty.dataset.extraGroup, extraQty.dataset.extraId, Number(extraQty.dataset.qty)); return; }
+});
+
+/* ============================================================
+   ORDER SUBMISSION
+   ============================================================ */
+function buildOrderPayload(){
+  const s = t();
+  const items = [];
+  state.meals.forEach((meal,i)=>{
+    const label = `${s.mealLabel} ${i+1}`;
+    if (meal.type==="sandwich"){
+      if (meal.sandwichId){ const sw = findSandwich(meal.sandwichId); items.push({ name:`${label} - ${sw.name}`, unitPrice: sw.price }); }
+      return;
+    }
+    meal.protein.items.forEach((entry, idx)=>{
+      const it = findProteinItem(entry.categoryKey, entry.id);
+      items.push({ name:`${label} - ${it.name}`, grams: entry.grams, unitPrice: proteinItemPrice(entry, idx) });
+    });
+    const allowance = proteinGramsSum(meal);
+    let remaining = allowance;
+    meal.carb.items.forEach(entry=>{
+      const it = findCarb(entry.id);
+      const free = Math.min(entry.grams, remaining);
+      const paid = entry.grams - free;
+      remaining -= free;
+      items.push({ name:`${label} - ${it.name}`, grams: entry.grams, unitPrice: (paid/50)*it.priceAdd50 });
+    });
+    if (meal.vegetable.grams>0){ items.push({ name:`${label} - ${MENU.VEGETABLE.name}`, grams: meal.vegetable.grams, unitPrice: 0 }); }
+    if (meal.sauce){ const sa = findSauce(meal.sauce); items.push({ name:`${label} - ${sa.name}`, unitPrice: sa.price }); }
+  });
+  Object.entries(state.extras.salads).forEach(([id,qty])=>{
+    if (qty<=0) return; const d = MENU.SALADS.find(x=>x.id===id); items.push({ name:d.name, unitPrice:d.price, quantity:qty });
+  });
+  Object.entries(state.extras.desserts).forEach(([id,qty])=>{
+    if (qty<=0) return; const d = findDessert(id); items.push({ name:d.name, unitPrice:d.price, quantity:qty });
+  });
+  Object.entries(state.extras.drinks).forEach(([id,qty])=>{
+    if (qty<=0) return; const d = findDrink(id); items.push({ name:d.name, unitPrice:d.price, quantity:qty });
+  });
+  const totals = calcGrandTotals();
+  return {
+    lang: state.lang, items,
+    totals: { calories:Math.round(totals.calories), protein:Math.round(totals.protein),
+      carbs:Math.round(totals.carbs), fat:Math.round(totals.fat), price: r1(totals.price) },
+  };
+}
+
+async function placeOrder(){
+  const s = t();
+  const btn = el("#btn-add-order");
+  const errBox = el("#order-error");
+  errBox.style.display = "none";
+
+  if (!CONFIG.orderApiUrl){
+    el("#confirm-order-num").textContent = "#"+Math.floor(100+Math.random()*900);
+    state.screen = "confirm"; render(); return;
+  }
+
+  const originalLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = s.sendingOrder;
+
+  try {
+    const res = await fetch(CONFIG.orderApiUrl, {
+      method:"POST", headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify(buildOrderPayload()),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || "request_failed");
+    el("#confirm-order-num").textContent = "#"+data.invoiceNumber;
+    state.screen = "confirm"; render();
+  } catch(err){
+    el("#order-error-text").textContent = s.orderError;
+    errBox.style.display = "flex";
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+  }
+}
+
+/* ============================================================
+   MAIN RENDER DISPATCH
+   ============================================================ */
+function showScreen(id){
+  els(".screen").forEach(sec=>sec.classList.remove("active"));
+  el("#"+id).classList.add("active");
+  window.scrollTo({top:0});
+}
+
+function render(){
+  applyLanguage();
+  if (state.screen==="landing"){ showScreen("screen-landing"); return; }
+  if (state.screen==="confirm"){ showScreen("screen-confirm"); const s=t(); el("#confirm-title").textContent=s.confirmTitle; el("#confirm-copy").textContent=s.confirmCopy; el("#btn-new-meal").textContent=s.newMeal; return; }
+  showScreen("screen-flow");
+  renderAppShell();
+}
+
+el("#btn-start-building").addEventListener("click", startSetup);
+els(".lang-toggle-btn").forEach(b=>{ if(b.id==="btn-lang-landing") b.addEventListener("click", toggleLanguage); });
+el("#btn-new-meal").addEventListener("click", startSetup);
+
+render();
+
+/* debug/test hook — harmless read access for QA, not required for the app itself */
+window.__debug = { state, MENU, calcProteinTotals, calcCarbTotals, calcVegTotals, calcSauceTotals,
+  calcMealTotals, calcExtrasTotals, calcGrandTotals, proteinGramsSum, buildOrderPayload };
+
+</script>
+</body>
+</html>
