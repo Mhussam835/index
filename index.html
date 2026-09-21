@@ -840,7 +840,12 @@ function catColor(key){
   return map[key] || "var(--line)";
 }
 function thumbHtml(id, wide){
-  return `<div class="item-thumb${wide?" wide":""}"><img src="images/${id}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>`;
+  return `<div class="item-thumb${wide ? " wide" : ""}">
+    <img src="images/${id}.jpg"
+         alt=""
+         loading="lazy"
+         onerror="this.onerror=null; this.src='images/${id}.png';">
+  </div>`;
 }
 
 function renderProteinStep(meal){
