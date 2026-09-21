@@ -59,6 +59,7 @@ h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;c
   box-shadow:0 14px 28px -10px rgba(0,0,0,.5)}
 .hero-cta:active{transform:scale(.97)}
 .landing-footer{text-align:center;padding:0 24px 28px;color:#8FA08D;font-size:12.5px}
+
 /* app chrome */
 .app-header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
   padding:14px clamp(16px,3vw,32px)}
@@ -837,6 +838,7 @@ function renderWizard(main){
 function catColor(key){
   const map = { chicken:"#C98F55", meat:"#C7A93F", fish:"#6FA466", salmon:"#5C93B0", shrimp:"#B0708F" };
   return map[key] || "var(--line)";
+}
 function thumbHtml(id, wide){
   return `<div class="item-thumb${wide ? " wide" : ""}">
     <img src="images/${id}.jpg"
