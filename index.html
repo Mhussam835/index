@@ -838,16 +838,25 @@ function renderWizard(main){
 function catColor(key){
   const map = { chicken:"#C98F55", meat:"#C7A93F", fish:"#6FA466", salmon:"#5C93B0", shrimp:"#B0708F" };
   return map[key] || "var(--line)";
-}
 function thumbHtml(id, wide){
   return `<div class="item-thumb${wide ? " wide" : ""}">
     <img src="images/${id}.jpg"
          alt=""
          loading="lazy"
-         onerror="this.onerror=null; this.src='images/${id}.PNG';">
+         data-try="jpg"
+         onerror="
+           if(this.dataset.try === 'jpg'){
+             this.dataset.try='jpeg';
+             this.src='images/${id}.jpeg';
+           } else if(this.dataset.try === 'jpeg'){
+             this.dataset.try='png';
+             this.src='images/${id}.png';
+           } else {
+             this.remove();
+           }
+         ">
   </div>`;
 }
-
 function renderProteinStep(meal){
   const s = t();
   const items = meal.protein.items;
