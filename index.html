@@ -728,6 +728,11 @@ function renderAppShell(){
     </header>
     <main class="app-main" id="app-main"></main>
     <div class="summary-bar" id="summary-bar"></div>
+    <div class="summary-macros">
+  <span><span class="dot" style="background:#2F6B33"></span>${fmtG(totals.carbs)} كارب</span>
+  <span><span class="dot" style="background:#8A5E1E"></span>${fmtG(totals.protein)} بروتين</span>
+  <span><span class="dot" style="background:#C68B6E"></span>${fmtG(totals.fat)} دهون</span>
+</div>
   `;
   el("#btn-shell-back").addEventListener("click", ()=>{
     if (state.screen==="setup"){ state.screen="landing"; render(); }
