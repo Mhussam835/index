@@ -34,12 +34,12 @@ html[dir="rtl"] .flip-rtl{transform:scaleX(-1)}
 
 /* landing */
 .landing{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 900px 500px at 15% -10%,#2E4E36 0%,transparent 60%),
-             radial-gradient(ellipse 700px 600px at 110% 10%,#1A3320 0%,transparent 55%),var(--primary);
+  background:radial-gradient(ellipse 900px 500px at 15% -10%,#C1392B 0%,transparent 60%),
+             radial-gradient(ellipse 700px 600px at 110% 10%,#2F6B33 0%,transparent 55%),var(--primary);
   color:#F6F4EA}
 .landing-topbar{display:flex;align-items:center;justify-content:space-between;padding:28px clamp(20px,5vw,60px) 0}
 .brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(155deg,#C7A24A,#8E6A22);
+.brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(155deg,#C1392B,#7A2118);
   display:flex;align-items:center;justify-content:center;color:#20200F;font-family:var(--font-display);font-weight:700;font-size:17px}
 .brand-name{font-size:18px;font-weight:700}
 .brand-sub{font-size:11px;color:#B9C7B8;margin-top:1px}
@@ -54,7 +54,7 @@ html[dir="rtl"] .flip-rtl{transform:scaleX(-1)}
 h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;color:#FBF9F1}
 .hero-title em{font-style:normal;color:#DDC48A}
 .hero-copy{margin-top:16px;max-width:48ch;color:#C4D0C1;font-size:15px;line-height:1.65}
-.hero-cta{margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:#F6F4EA;color:#20301F;
+.hero-cta{margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:#C1392B;color:#FFFFFF;
   border:none;padding:17px 28px;border-radius:var(--radius-md);font-size:15px;font-weight:700;
   box-shadow:0 14px 28px -10px rgba(0,0,0,.5)}
 .hero-cta:active{transform:scale(.97)}
@@ -728,11 +728,6 @@ function renderAppShell(){
     </header>
     <main class="app-main" id="app-main"></main>
     <div class="summary-bar" id="summary-bar"></div>
-    <div class="summary-macros">
-  <span><span class="dot" style="background:#2F6B33"></span>${fmtG(totals.carbs)} كارب</span>
-  <span><span class="dot" style="background:#8A5E1E"></span>${fmtG(totals.protein)} بروتين</span>
-  <span><span class="dot" style="background:#C68B6E"></span>${fmtG(totals.fat)} دهون</span>
-</div>
   `;
   el("#btn-shell-back").addEventListener("click", ()=>{
     if (state.screen==="setup"){ state.screen="landing"; render(); }
@@ -759,9 +754,14 @@ function renderSummaryBar(){
   bar.style.display="flex";
   const totals = calcGrandTotals();
   bar.innerHTML = `
-    <div class="summary-kcal">${Math.round(totals.calories)}<span> ${s.kcalUnit}</span></div>
-    <div class="summary-price">${fmtPrice(totals.price)}</div>
-  `;
+  <div class="summary-kcal">${Math.round(totals.calories)}<span> ${s.kcalUnit}</span></div>
+  <div class="summary-price">${fmtPrice(totals.price)}</div>
+  <div class="summary-macros">
+    <span><span class="dot" style="background:#2F6B33"></span>${fmtG(totals.carbs)} كارب</span>
+    <span><span class="dot" style="background:#8A5E1E"></span>${fmtG(totals.protein)} بروتين</span>
+    <span><span class="dot" style="background:#C68B6E"></span>${fmtG(totals.fat)} دهون</span>
+  </div>
+`;
 }
 
 function renderMain(){
