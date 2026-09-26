@@ -40,23 +40,25 @@ html[dir="rtl"] .flip-rtl{transform:scaleX(-1)}
 .landing-topbar{display:flex;align-items:center;justify-content:space-between;padding:28px clamp(20px,5vw,60px) 0}
 .brand{display:flex;align-items:center;gap:12px}
 .brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(155deg,#C1392B,#7A2118);
-  display:flex;align-items:center;justify-content:center;color:#20200F;font-family:var(--font-display);font-weight:700;font-size:17px}
+  display:flex;align-items:center;justify-content:center;color:#FBEAE7;font-family:var(--font-display);font-weight:700;font-size:17px;
+  position:relative;overflow:hidden;flex-shrink:0}
+.brand-mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.brand-mark.small{width:30px;height:30px;font-size:13px;border-radius:7px}
 .brand-name{font-size:18px;font-weight:700}
 .brand-sub{font-size:11px;color:#B9C7B8;margin-top:1px}
 .lang-toggle{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#F1EFE4;
   padding:9px 15px;border-radius:var(--radius-sm);font-size:13px;font-weight:700}
 .landing-hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px 24px 56px}
-.hero-tag{font-size:13.5px;color:#D9C99A;margin-bottom:18px;font-weight:600}
+.hero-tag{font-size:13.5px;color:#BEE6B0;margin-bottom:18px;font-weight:600}
 .hero-image{width:min(190px,36vw);height:min(190px,36vw);border-radius:30px;margin-bottom:30px;
   background:radial-gradient(circle at 32% 28%,#E88F82,#C1392B 45%,#7A2118 100%);
-  box-shadow:0 26px 60px -18px rgba(0,0,0,.55),inset 0 0 0 8px rgba(255,255,255,.06);position:relative}
-.hero-image svg{position:absolute;inset:0;margin:auto;width:44%;height:44%}
+  position:relative;}
+.hero-image svg{position:absolute;inset:0;margin:auto;width:75%;height:75%}
 h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;color:#FBF9F1}
-.hero-title em{font-style:normal;color:#DDC48A}
-.hero-copy{margin-top:16px;max-width:48ch;color:#C4D0C1;font-size:15px;line-height:1.65}
+.hero-title em{font-style:normal;color:#BEE6B0}
+.hero-copy{margin-top:16px;max-width:48ch;color:#CFE3C9;font-size:15px;line-height:1.65}
 .hero-cta{margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:#C1392B;color:#FFFFFF;
-  border:none;padding:17px 28px;border-radius:var(--radius-md);font-size:15px;font-weight:700;
-  box-shadow:0 14px 28px -10px rgba(0,0,0,.5)}
+  border:none;padding:17px 28px;border-radius:var(--radius-md);font-size:15px;font-weight:700;}
 .hero-cta:active{transform:scale(.97)}
 .landing-footer{text-align:center;padding:0 24px 28px;color:#8FA08D;font-size:12.5px}
 
@@ -195,7 +197,7 @@ h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;c
     <div class="landing">
       <div class="landing-topbar">
         <div class="brand">
-          <div class="brand-mark">V</div>
+         <div class="brand-mark">H<img src="images/logo.jpeg" alt="" onerror="this.remove()"></div>
           <div><div class="brand-name" id="brand-name">هيلثي لايف</div><div class="brand-sub" id="brand-sub">مطعم صحي</div></div>
         </div>
         <button class="lang-toggle lang-toggle-btn" id="btn-lang-landing">English</button>
@@ -254,7 +256,7 @@ const CONFIG = {
 /* ============================================================
    MENU DATA  (from the restaurant's real spreadsheet + price list)
    ============================================================ */
-    const MENU = {"PROTEIN_CATEGORIES": [{"key": "chicken", "name": "دجاج", "priceBase100": 19, "priceAdd50": 4, "items": [{"id": "chk-grilled", "name": "دجاج مشوي", "caloriesPer100g": 163.3, "proteinPer100g": 30.7, "carbsPer100g": 0.7, "fatPer100g": 4.0}, {"id": "chk-mandi", "name": "دجاج مندي", "caloriesPer100g": 163.3, "proteinPer100g": 28.7, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-shawarma", "name": "دجاج شاورما", "caloriesPer100g": 163.3, "proteinPer100g": 27.3, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-fajita", "name": "دجاج فاهيتا", "caloriesPer100g": 163.3, "proteinPer100g": 29.3, "carbsPer100g": 2.7, "fatPer100g": 4.0}, {"id": "chk-shish-tawook", "name": "دجاج شيش طاووق", "caloriesPer100g": 163.3, "proteinPer100g": 28.0, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-dynamite", "name": "دجاج داينمت", "caloriesPer100g": 196.7, "proteinPer100g": 26.7, "carbsPer100g": 5.3, "fatPer100g": 6.7}, {"id": "chk-corn", "name": "دجاج الذرة", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 5.3, "fatPer100g": 5.3}, {"id": "chk-special", "name": "دجاج سبيشل", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-tandoori", "name": "دجاج تندوري", "caloriesPer100g": 170.0, "proteinPer100g": 25.3, "carbsPer100g": 2.0, "fatPer100g": 4.7}, {"id": "chk-ranch", "name": "دجاج رانش", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-french", "name": "دجاج فرنسي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-curry", "name": "دجاج كاري", "caloriesPer100g": 176.7, "proteinPer100g": 24.7, "carbsPer100g": 0.7, "fatPer100g": 5.3}, {"id": "chk-bbq", "name": "دجاج BBQ", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-satay", "name": "دجاج ساتيه", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.0}, {"id": "chk-chinese", "name": "دجاج صيني", "caloriesPer100g": 190.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-lemon", "name": "دجاج ليمون", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-dill", "name": "دجاج شبت", "caloriesPer100g": 176.7, "proteinPer100g": 26.0, "carbsPer100g": 1.0, "fatPer100g": 5.3}, {"id": "chk-butter", "name": "دجاج بالزبدة", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-teriyaki", "name": "دجاج ترياكي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-cream", "name": "دجاج كريمة", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 7.3}, {"id": "chk-biryani", "name": "دجاج برياني", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-paprika", "name": "دجاج بابريكا", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-paprika-fit", "name": "دجاج بابريكا فيت", "caloriesPer100g": 186.7, "proteinPer100g": 29.3, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-crispy", "name": "دجاج كرسبي", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-bamya", "name": "دجاج بامية", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-molokhia", "name": "دجاج ملوخية", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-black-pepper", "name": "دجاج فلفل أسود", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-thyme", "name": "دجاج زعتر", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.0, "fatPer100g": 6.0}, {"id": "chk-stroganoff", "name": "دجاج ستروجانوف", "caloriesPer100g": 183.3, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-masala", "name": "دجاج ماسالا", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 0.7, "fatPer100g": 6.0}, {"id": "chk-cajun", "name": "دجاج الكاجون", "caloriesPer100g": 186.7, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-kabab", "name": "كباب دجاج", "caloriesPer100g": 162.0, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 6.0}, {"id": "chk-besto", "name": "دجاج بيستو", "caloriesPer100g": 236.0, "proteinPer100g": 24.0, "carbsPer100g":1.0, "fatPer100g": 12.0}, {"id": "chk-65", "name": "دجاج 65", "caloriesPer100g": 186.0, "proteinPer100g": 28.0, "carbsPer100g": 1.0, "fatPer100g": 10.0},]}, {"key": "meat", "name": "لحم", "priceBase100": 20, "priceAdd50": 5, "items": [{"id": "meat-balls", "name": "كرات لحم", "caloriesPer100g": 210.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-fajita", "name": "لحم فاهيتا", "caloriesPer100g": 196.7, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 8.7}, {"id": "meat-chinese", "name": "لحم صيني", "caloriesPer100g": 203.3, "proteinPer100g": 29.3, "carbsPer100g": 4.0, "fatPer100g": 8.0}, {"id": "meat-stroganoff", "name": "لحم ستروجانوف", "caloriesPer100g": 210.0, "proteinPer100g": 30.7, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-bbq", "name": "لحم باربيكيو", "caloriesPer100g": 203.3, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 9.3}, {"id": "meat-kabab", "name": "كباب لحم", "caloriesPer100g": 260.0, "proteinPer100g": 26.0, "carbsPer100g": 6.0, "fatPer100g": 34.0}, {"id": "meat-cream", "name": "لحم كريمة", "caloriesPer100g": 220.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 12.0}, {"id": "meat-masala", "name": "لحم ماسالا", "caloriesPer100g": 190.0, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 8.0}]}, {"key": "fish", "name": "سمك", "priceBase100": 19, "priceAdd50": 5, "items": [{"id": "fish-grilled", "name": "سمك مشوي", "caloriesPer100g": 143.3, "proteinPer100g": 27.3, "carbsPer100g": 0.7, "fatPer100g": 3.3}, {"id": "fish-tahini", "name": "سمك طحينة", "caloriesPer100g": 156.7, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 5.3}, {"id": "fish-dill-lemon", "name": "سمك شبت وليمون", "caloriesPer100g": 146.7, "proteinPer100g": 27.3, "carbsPer100g": 1.3, "fatPer100g": 3.7}]}, {"key": "salmon", "name": "سلمون", "priceBase100": 28, "priceAdd50": 8, "items": [{"id": "salmon-grilled", "name": "سلمون مشوي", "caloriesPer100g": 203.3, "proteinPer100g": 32.0, "carbsPer100g": 0.7, "fatPer100g": 10.7}, {"id": "salmon-dill-lemon", "name": "سلمون شبت وليمون", "caloriesPer100g": 210.0, "proteinPer100g": 31.3, "carbsPer100g": 1.3, "fatPer100g": 11.3}, {"id": "salmon-madfoon", "name": "سلمون مدفون", "caloriesPer100g": 216.7, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 12.0}]}, {"key": "shrimp", "name": "روبيان", "priceBase100": 27, "priceAdd50": 8, "items": [{"id": "shrimp-cream-corn", "name": "جمبري كريمة وذرة", "caloriesPer100g": 176.7, "proteinPer100g": 28.0, "carbsPer100g": 1.3, "fatPer100g": 6.7}, {"id": "shrimp-cajun", "name": "جمبري كيجن", "caloriesPer100g": 150.0, "proteinPer100g": 30.0, "carbsPer100g": 1.3, "fatPer100g": 4.0}]}], "CARB_ITEMS": [{"id": "rice-white", "name": "رز أبيض", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.0, "fatPer100g": 0.3}, {"id": "rice-mandi", "name": "رز مندي", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 26.7, "fatPer100g": 2.3}, {"id": "rice-kabsa", "name": "رز كبسة", "priceAdd50": 2, "caloriesPer100g": 143.3, "proteinPer100g": 3.3, "carbsPer100g": 28.0, "fatPer100g": 2.0}, {"id": "rice-biryani", "name": "رز برياني", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.7, "fatPer100g": 2.3}, {"id": "potato-grilled", "name": "بطاطس مشوية", "priceAdd50": 3, "caloriesPer100g": 96.7, "proteinPer100g": 2.0, "carbsPer100g": 22.7, "fatPer100g": 0.1}, {"id": "potato-mashed", "name": "بطاطس مهروسة", "priceAdd50": 3, "caloriesPer100g": 110.0, "proteinPer100g": 2.0, "carbsPer100g": 20.0, "fatPer100g": 2.7}, {"id": "sweet-potato", "name": "بطاطس حلوة", "priceAdd50": 3, "caloriesPer100g": 86.7, "proteinPer100g": 1.3, "carbsPer100g": 20.0, "fatPer100g": 0.2}, {"id": "pasta", "name": "باستا", "priceAdd50": 4, "caloriesPer100g": 150.0, "proteinPer100g": 4.7, "carbsPer100g": 25.3, "fatPer100g": 3.7}, {"id": "noodles", "name": "نودلز", "priceAdd50": 4, "caloriesPer100g": 136.7, "proteinPer100g": 4.0, "carbsPer100g": 26.7, "fatPer100g": 1.0}, {"id": "spaghetti-tandoori", "name": "اسباغتي تندوري", "priceAdd50": 4, "caloriesPer100g": 143.3, "proteinPer100g": 4.7, "carbsPer100g": 28.7, "fatPer100g": 0.8}], "VEGETABLE": {"id": "mixed-veg", "name": "خضار مشكل", "price": 0, "caloriesPer100g": 65.0, "proteinPer100g": 2.5, "carbsPer100g": 11.5, "fatPer100g": 0.2}, "SAUCES": [{"id": "tahini", "name": "طحينة", "price": 1, "calories": 18, "protein": 0.8, "carbs": 1.0, "fat": 1.5}, {"id": "yogurt-mint", "name": "زبادي نعناع", "price": 1, "calories": 10, "protein": 0.7, "carbs": 0.8, "fat": 0.3}, {"id": "spicy", "name": "سبايسي", "price": 1, "calories": 15, "protein": 0.9, "carbs": 0.7, "fat": 0.8}], "DRINKS": [{"id": "pepsi-diet", "name": "بيبسي دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "pepsi-max", "name": "بيبسي ماكس", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-diet", "name": "سفن دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-mojito", "name": "سفن موهيتو", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "dew-diet", "name": "ديو دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "citrus-diet", "name": "حمضيات دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "water", "name": "ماء", "price": 1, "calories": 0, "protein": 0, "carbs": 0, "fat": 0}], "SANDWICHES": [{"id": "tortilla-buffalo", "name": "تورتلا دجاج بافلو", "price": 16, "calories": 400, "protein": 38, "carbs": 38, "fat": 10}, {"id": "tortilla-grilled", "name": "تورتلا دجاج مشوي", "price": 16, "calories": 360, "protein": 38, "carbs": 36, "fat": 6}, {"id": "tortilla-fajita", "name": "تورتلا دجاج فاهيتا", "price": 16, "calories": 380, "protein": 38, "carbs": 40, "fat": 7}, {"id": "tuna-toast", "name": "توست تونة", "price": 12, "calories": 300, "protein": 31, "carbs": 28, "fat": 7}, {"id": "beef-burger", "name": "برجر لحم", "price": 22, "calories": 460, "protein": 33, "carbs": 33, "fat": 20}, {"id": "crispy-chicken-burger", "name": "برجر دجاج كرسبي", "price": 22, "calories": 430, "protein": 35, "carbs": 36, "fat": 16}], "DESSERTS": [{"id": "energy-balls", "name": "كرات الطاقة", "price": 15, "calories": 231, "protein": 5, "carbs": 10, "fat": 5}, {"id": "cookies", "name": "كوكيز", "price": 7, "calories": 124, "protein": 3, "carbs": 15, "fat": 6}, {"id": "oats-dates", "name": "شوفان بالتمر", "price": 10, "calories": 195, "protein": 6, "carbs": 28, "fat": 3}, {"id": "cheesecake", "name": "تشيز كيك", "price": 15, "calories": 210, "protein": 7, "carbs": 16, "fat": 10}, {"id": "umm-ali", "name": "أم علي", "price": 13, "calories": 210, "protein": 8, "carbs": 28, "fat": 7}, {"id": "areeka", "name": "عريكة", "price": 12, "calories": 225, "protein": 9, "carbs": 33, "fat": 7}, {"id": "basbousa-plain", "name": "بسبوسة سادة", "price": 6, "calories": 124, "protein": 5, "carbs": 23, "fat": 6}, {"id": "basbousa-cream", "name": "بسبوسة بالقشطة", "price": 8, "calories": 150, "protein": 6, "carbs": 23, "fat": 8}, {"id": "clean-treat", "name": "كلين تريت", "price": 15, "calories": 130, "protein": 7, "carbs": 13, "fat": 5}], "SALADS": [{"id": "caesar-chicken", "name": "سلطة سيزر دجاج", "price": 14, "calories": 240, "protein": 23, "carbs": 8, "fat": 13}, {"id": "greek-salad", "name": "سلطة يونانية", "price": 8, "calories": 190, "protein": 7, "carbs": 10, "fat": 15}, {"id": "arugula-salad", "name": "سلطة جرجير", "price": 8, "calories": 110, "protein": 4, "carbs": 6, "fat": 7}, {"id": "watermelon", "name": "حبحب (بطيخ)", "price": 5, "calories": 75, "protein": 1.5, "carbs": 18.7, "fat": 0.4}]};
+    const MENU = {"PROTEIN_CATEGORIES": [{"key": "chicken", "name": "دجاج", "priceBase100": 19, "priceAdd50": 4, "items": [{"id": "chk-grilled", "name": "دجاج مشوي", "caloriesPer100g": 163.3, "proteinPer100g": 30.7, "carbsPer100g": 0.7, "fatPer100g": 4.0}, {"id": "chk-mandi", "name": "دجاج مندي", "caloriesPer100g": 163.3, "proteinPer100g": 28.7, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-shawarma", "name": "دجاج شاورما", "caloriesPer100g": 163.3, "proteinPer100g": 27.3, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-fajita", "name": "دجاج فاهيتا", "caloriesPer100g": 163.3, "proteinPer100g": 29.3, "carbsPer100g": 2.7, "fatPer100g": 4.0}, {"id": "chk-shish-tawook", "name": "دجاج شيش طاووق", "caloriesPer100g": 163.3, "proteinPer100g": 28.0, "carbsPer100g": 2.0, "fatPer100g": 4.0}, {"id": "chk-dynamite", "name": "دجاج داينمت", "caloriesPer100g": 196.7, "proteinPer100g": 26.7, "carbsPer100g": 5.3, "fatPer100g": 6.7}, {"id": "chk-corn", "name": "دجاج الذرة", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 5.3, "fatPer100g": 5.3}, {"id": "chk-special", "name": "دجاج سبيشل", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-tandoori", "name": "دجاج تندوري", "caloriesPer100g": 170.0, "proteinPer100g": 25.3, "carbsPer100g": 2.0, "fatPer100g": 4.7}, {"id": "chk-ranch", "name": "دجاج رانش", "caloriesPer100g": 183.3, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-french", "name": "دجاج فرنسي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-curry", "name": "دجاج كاري", "caloriesPer100g": 176.7, "proteinPer100g": 24.7, "carbsPer100g": 0.7, "fatPer100g": 5.3}, {"id": "chk-bbq", "name": "دجاج BBQ", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-satay", "name": "دجاج ساتيه", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.0}, {"id": "chk-chinese", "name": "دجاج صيني", "caloriesPer100g": 190.0, "proteinPer100g": 26.0, "carbsPer100g": 4.0, "fatPer100g": 5.3}, {"id": "chk-lemon", "name": "دجاج ليمون", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-dill", "name": "دجاج شبت", "caloriesPer100g": 176.7, "proteinPer100g": 26.0, "carbsPer100g": 1.0, "fatPer100g": 5.3}, {"id": "chk-butter", "name": "دجاج بالزبدة", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-teriyaki", "name": "دجاج ترياكي", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-cream", "name": "دجاج كريمة", "caloriesPer100g": 190.0, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 7.3}, {"id": "chk-biryani", "name": "دجاج برياني", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 2.7, "fatPer100g": 4.7}, {"id": "chk-paprika", "name": "دجاج بابريكا", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-paprika-fit", "name": "دجاج بابريكا فيت", "caloriesPer100g": 186.7, "proteinPer100g": 29.3, "carbsPer100g": 1.3, "fatPer100g": 4.0}, {"id": "chk-crispy", "name": "دجاج كرسبي", "caloriesPer100g": 180.0, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-bamya", "name": "دجاج بامية", "caloriesPer100g": 183.3, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-molokhia", "name": "دجاج ملوخية", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-black-pepper", "name": "دجاج فلفل أسود", "caloriesPer100g": 176.7, "proteinPer100g": 25.3, "carbsPer100g": 1.3, "fatPer100g": 6.0}, {"id": "chk-thyme", "name": "دجاج زعتر", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 1.0, "fatPer100g": 6.0}, {"id": "chk-stroganoff", "name": "دجاج ستروجانوف", "caloriesPer100g": 183.3, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 6.7}, {"id": "chk-masala", "name": "دجاج ماسالا", "caloriesPer100g": 180.0, "proteinPer100g": 25.3, "carbsPer100g": 0.7, "fatPer100g": 6.0}, {"id": "chk-cajun", "name": "دجاج الكاجون", "caloriesPer100g": 186.7, "proteinPer100g": 26.0, "carbsPer100g": 1.3, "fatPer100g": 5.3}, {"id": "chk-kabab", "name": "كباب دجاج", "caloriesPer100g": 162.0, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 6.0}, {"id": "chk-besto", "name": "دجاج بيستو", "caloriesPer100g": 236.0, "proteinPer100g": 24.0, "carbsPer100g":1.0, "fatPer100g": 12.0}, {"id": "chk-65", "name": "دجاج 65", "caloriesPer100g": 186.0, "proteinPer100g": 28.0, "carbsPer100g": 1.0, "fatPer100g": 10.0},]}, {"key": "meat", "name": "لحم", "priceBase100": 20, "priceAdd50": 5, "items": [{"id": "meat-balls", "name": "كرات لحم", "caloriesPer100g": 210.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-fajita", "name": "لحم فاهيتا", "caloriesPer100g": 196.7, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 8.7}, {"id": "meat-chinese", "name": "لحم صيني", "caloriesPer100g": 203.3, "proteinPer100g": 29.3, "carbsPer100g": 4.0, "fatPer100g": 8.0}, {"id": "meat-stroganoff", "name": "لحم ستروجانوف", "caloriesPer100g": 210.0, "proteinPer100g": 30.7, "carbsPer100g": 2.0, "fatPer100g": 10.0}, {"id": "meat-bbq", "name": "لحم باربيكيو", "caloriesPer100g": 203.3, "proteinPer100g": 30.0, "carbsPer100g": 2.0, "fatPer100g": 9.3}, {"id": "meat-kabab", "name": "كباب لحم", "caloriesPer100g": 260.0, "proteinPer100g": 26.0, "carbsPer100g": 6.0, "fatPer100g": 34.0}, {"id": "meat-cream", "name": "لحم كريمة", "caloriesPer100g": 220.0, "proteinPer100g": 29.3, "carbsPer100g": 2.0, "fatPer100g": 12.0}, {"id": "meat-masala", "name": "لحم ماسالا", "caloriesPer100g": 190.0, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 8.0}]}, {"key": "fish", "name": "سمك", "priceBase100": 19, "priceAdd50": 5, "items": [{"id": "fish-grilled", "name": "سمك مشوي", "caloriesPer100g": 143.3, "proteinPer100g": 27.3, "carbsPer100g": 0.7, "fatPer100g": 3.3}, {"id": "fish-tahini", "name": "سمك طحينة", "caloriesPer100g": 156.7, "proteinPer100g": 26.7, "carbsPer100g": 2.0, "fatPer100g": 5.3}, {"id": "fish-dill-lemon", "name": "سمك شبت وليمون", "caloriesPer100g": 146.7, "proteinPer100g": 27.3, "carbsPer100g": 1.3, "fatPer100g": 3.7}]}, {"key": "salmon", "name": "سلمون", "priceBase100": 28, "priceAdd50": 8, "items": [{"id": "salmon-grilled", "name": "سلمون مشوي", "caloriesPer100g": 203.3, "proteinPer100g": 32.0, "carbsPer100g": 0.7, "fatPer100g": 10.7}, {"id": "salmon-dill-lemon", "name": "سلمون شبت وليمون", "caloriesPer100g": 210.0, "proteinPer100g": 31.3, "carbsPer100g": 1.3, "fatPer100g": 11.3}, {"id": "salmon-madfoon", "name": "سلمون مدفون", "caloriesPer100g": 216.7, "proteinPer100g": 30.7, "carbsPer100g": 1.3, "fatPer100g": 12.0}]}, {"key": "shrimp", "name": "روبيان", "priceBase100": 27, "priceAdd50": 8, "items": [{"id": "shrimp-cream-corn", "name": "جمبري كريمة وذرة", "caloriesPer100g": 176.7, "proteinPer100g": 28.0, "carbsPer100g": 1.3, "fatPer100g": 6.7}, {"id": "shrimp-cajun", "name": "جمبري كيجن", "caloriesPer100g": 150.0, "proteinPer100g": 30.0, "carbsPer100g": 1.3, "fatPer100g": 4.0}]}], "CARB_ITEMS": [{"id": "rice-white", "name": "رز أبيض", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.0, "fatPer100g": 0.3}, {"id": "rice-mandi", "name": "رز مندي", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 26.7, "fatPer100g": 2.3}, {"id": "rice-kabsa", "name": "رز كبسة", "priceAdd50": 2, "caloriesPer100g": 143.3, "proteinPer100g": 3.3, "carbsPer100g": 28.0, "fatPer100g": 2.0}, {"id": "rice-biryani", "name": "رز برياني", "priceAdd50": 2, "caloriesPer100g": 130.0, "proteinPer100g": 2.7, "carbsPer100g": 28.7, "fatPer100g": 2.3}, {"id": "potato-grilled", "name": "بطاطس مشوية", "priceAdd50": 3, "caloriesPer100g": 96.7, "proteinPer100g": 2.0, "carbsPer100g": 22.7, "fatPer100g": 0.1}, {"id": "potato-mashed", "name": "بطاطس مهروسة", "priceAdd50": 3, "caloriesPer100g": 110.0, "proteinPer100g": 2.0, "carbsPer100g": 20.0, "fatPer100g": 2.7}, {"id": "sweet-potato", "name": "بطاطس حلوة", "priceAdd50": 3, "caloriesPer100g": 86.7, "proteinPer100g": 1.3, "carbsPer100g": 20.0, "fatPer100g": 0.2}, {"id": "pasta", "name": "باستا", "priceAdd50": 4, "caloriesPer100g": 150.0, "proteinPer100g": 4.7, "carbsPer100g": 25.3, "fatPer100g": 3.7}, {"id": "noodles", "name": "نودلز", "priceAdd50": 4, "caloriesPer100g": 136.7, "proteinPer100g": 4.0, "carbsPer100g": 26.7, "fatPer100g": 1.0}, {"id": "spaghetti-tandoori", "name": "اسباغتي تندوري", "priceAdd50": 4, "caloriesPer100g": 143.3, "proteinPer100g": 4.7, "carbsPer100g": 28.7, "fatPer100g": 0.8}], "VEGETABLE": {"id": "mixed-veg", "name": "خضار مشكل", "price": 4, "caloriesPer100g": 65.0, "proteinPer100g": 2.5, "carbsPer100g": 11.5, "fatPer100g": 0.2}, "SAUCES": [{"id": "tahini", "name": "طحينة", "price": 1, "calories": 18, "protein": 0.8, "carbs": 1.0, "fat": 1.5}, {"id": "yogurt-mint", "name": "زبادي نعناع", "price": 1, "calories": 10, "protein": 0.7, "carbs": 0.8, "fat": 0.3}, {"id": "spicy", "name": "سبايسي", "price": 1, "calories": 15, "protein": 0.9, "carbs": 0.7, "fat": 0.8}], "DRINKS": [{"id": "pepsi-diet", "name": "بيبسي دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "pepsi-max", "name": "بيبسي ماكس", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-diet", "name": "سفن دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "sevenup-mojito", "name": "سفن موهيتو", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "dew-diet", "name": "ديو دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "citrus-diet", "name": "حمضيات دايت", "price": 3, "calories": 1, "protein": 0, "carbs": 0, "fat": 0}, {"id": "water", "name": "ماء", "price": 1, "calories": 0, "protein": 0, "carbs": 0, "fat": 0}], "SANDWICHES": [{"id": "tortilla-buffalo", "name": "تورتلا دجاج بافلو", "price": 16, "calories": 400, "protein": 38, "carbs": 38, "fat": 10}, {"id": "tortilla-grilled", "name": "تورتلا دجاج مشوي", "price": 16, "calories": 360, "protein": 38, "carbs": 36, "fat": 6}, {"id": "tortilla-fajita", "name": "تورتلا دجاج فاهيتا", "price": 16, "calories": 380, "protein": 38, "carbs": 40, "fat": 7}, {"id": "tuna-toast", "name": "توست تونة", "price": 12, "calories": 300, "protein": 31, "carbs": 28, "fat": 7}, {"id": "beef-burger", "name": "برجر لحم", "price": 22, "calories": 460, "protein": 33, "carbs": 33, "fat": 20}, {"id": "crispy-chicken-burger", "name": "برجر دجاج كرسبي", "price": 22, "calories": 430, "protein": 35, "carbs": 36, "fat": 16}], "DESSERTS": [{"id": "energy-balls", "name": "كرات الطاقة", "price": 15, "calories": 231, "protein": 5, "carbs": 10, "fat": 5}, {"id": "cookies", "name": "كوكيز", "price": 7, "calories": 124, "protein": 3, "carbs": 15, "fat": 6}, {"id": "oats-dates", "name": "شوفان بالتمر", "price": 10, "calories": 195, "protein": 6, "carbs": 28, "fat": 3}, {"id": "cheesecake", "name": "تشيز كيك", "price": 15, "calories": 210, "protein": 7, "carbs": 16, "fat": 10}, {"id": "umm-ali", "name": "أم علي", "price": 13, "calories": 210, "protein": 8, "carbs": 28, "fat": 7}, {"id": "areeka", "name": "عريكة", "price": 12, "calories": 225, "protein": 9, "carbs": 33, "fat": 7}, {"id": "basbousa-plain", "name": "بسبوسة سادة", "price": 6, "calories": 124, "protein": 5, "carbs": 23, "fat": 6}, {"id": "basbousa-cream", "name": "بسبوسة بالقشطة", "price": 8, "calories": 150, "protein": 6, "carbs": 23, "fat": 8}, {"id": "clean-treat", "name": "كلين تريت", "price": 15, "calories": 130, "protein": 7, "carbs": 13, "fat": 5}], "SALADS": [{"id": "caesar-chicken", "name": "سلطة سيزر دجاج", "price": 14, "calories": 240, "protein": 23, "carbs": 8, "fat": 13}, {"id": "greek-salad", "name": "سلطة يونانية", "price": 8, "calories": 190, "protein": 7, "carbs": 10, "fat": 15}, {"id": "arugula-salad", "name": "سلطة جرجير", "price": 8, "calories": 110, "protein": 4, "carbs": 6, "fat": 7}, {"id": "watermelon", "name": "حبحب (بطيخ)", "price": 5, "calories": 75, "protein": 1.5, "carbs": 18.7, "fat": 0.4}]};
   /* ============================================================
    UI STRINGS (chrome only — catalog item names stay Arabic)
    ============================================================ */
@@ -412,28 +414,51 @@ function proteinGramsSum(meal){
 function calcCarbTotals(meal, proteinGrams){
   let remaining = proteinGrams;
   let total = zeroTotals();
+
   meal.carb.items.forEach(entry=>{
     const item = findCarb(entry.id);
     const scale = entry.grams/100;
+
     const free = Math.min(entry.grams, remaining);
     const paid = entry.grams - free;
+
     remaining -= free;
+
     const price = (paid/50)*item.priceAdd50;
+
     total = addTotals(total, {
-      calories:item.caloriesPer100g*scale, protein:item.proteinPer100g*scale,
-      carbs:item.carbsPer100g*scale, fat:item.fatPer100g*scale, price,
+      calories:item.caloriesPer100g*scale,
+      protein:item.proteinPer100g*scale,
+      carbs:item.carbsPer100g*scale,
+      fat:item.fatPer100g*scale,
+      price,
     });
   });
-  return total;
+
+  return {
+    total,
+    remaining
+  };
 }
 
-function calcVegTotals(meal){
+function calcVegTotals(meal, remainingFree){
   if (!meal.vegetable.grams) return zeroTotals();
+
   const v = MENU.VEGETABLE;
   const scale = meal.vegetable.grams/100;
-  return { calories:v.caloriesPer100g*scale, protein:v.proteinPer100g*scale,
-    carbs:v.carbsPer100g*scale, fat:v.fatPer100g*scale, price:(v.price||0)*scale };
+
+  const free = Math.min(meal.vegetable.grams, remainingFree);
+  const paid = meal.vegetable.grams - free;
+
+  return {
+    calories:v.caloriesPer100g*scale,
+    protein:v.proteinPer100g*scale,
+    carbs:v.carbsPer100g*scale,
+    fat:v.fatPer100g*scale,
+    price:(v.price||0)*(paid/100)
+  };
 }
+
 
 function calcSauceTotals(meal){
   if (!meal.sauce) return zeroTotals();
@@ -447,13 +472,23 @@ function calcMealTotals(meal){
     const s = findSandwich(meal.sandwichId);
     return { calories:s.calories, protein:s.protein, carbs:s.carbs, fat:s.fat, price:s.price };
   }
-  const proteinGrams = proteinGramsSum(meal);
-  let total = calcProteinTotals(meal);
-  total = addTotals(total, calcCarbTotals(meal, proteinGrams));
-  total = addTotals(total, calcVegTotals(meal));
-  total = addTotals(total, calcSauceTotals(meal));
-  return total;
-}
+ const proteinGrams = proteinGramsSum(meal);
+
+let total = calcProteinTotals(meal);
+
+const carbResult = calcCarbTotals(meal, proteinGrams);
+
+total = addTotals(total, carbResult.total);
+
+total = addTotals(
+  total,
+  calcVegTotals(meal, carbResult.remaining)
+);
+
+total = addTotals(total, calcSauceTotals(meal));
+
+return total;
+
 
 function calcExtrasTotals(){
   let total = zeroTotals();
@@ -721,6 +756,7 @@ function renderAppShell(){
     <header class="app-header">
       <div class="app-header-row">
         <div class="header-left">
+         <div class="brand-mark small">H<img src="images/logo.png" alt="" onerror="this.remove()"></div>
           <button class="icon-btn" id="btn-shell-back" aria-label="back">
             <svg class="flip-rtl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
           </button>
@@ -765,7 +801,7 @@ function renderSummaryBar(){
   <div class="summary-macros">
     <span><span class="dot" style="background:#2F6B33"></span>${fmtG(totals.carbs)} كارب</span>
     <span><span class="dot" style="background:#8A5E1E"></span>${fmtG(totals.protein)} بروتين</span>
-    <span><span class="dot" style="background:#C68B6E"></span>${fmtG(totals.fat)} دهون</span>
+    <span><span class="dot" style="background:#C1392B"></span>${fmtG(totals.fat)} دهون</span>
   </div>
 `;
 }
@@ -1041,7 +1077,7 @@ function donutSegments(totals){
   return [
     {color:"#2F6B33", val:cCal},
     {color:"#8A5E1E", val:pCal},
-    {color:"#C68B6E", val:fCal},
+    {color:"#C1392B", val:fCal},
   ];
 }
 function donutBlockHtml(totals, size, textColor){
@@ -1069,7 +1105,7 @@ function macroLegendHtml(totals, s, textColor, dotBorder){
   return `<div class="macro-legend" style="color:${textColor||"var(--ink)"}">
     ${row("#2F6B33", s.carbs, totals.carbs)}
     ${row("#8A5E1E", s.protein, totals.protein)}
-    ${row("#C68B6E", s.fat, totals.fat)}
+    ${row("#C1392B", s.fat, totals.fat)}
   </div>`;
 }
 
