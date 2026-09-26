@@ -444,19 +444,16 @@ function calcCarbTotals(meal, proteinGrams){
 
 function calcVegTotals(meal, remainingFree){
   if (!meal.vegetable.grams) return zeroTotals();
-
   const v = MENU.VEGETABLE;
   const scale = meal.vegetable.grams/100;
-
   const free = Math.min(meal.vegetable.grams, remainingFree);
   const paid = meal.vegetable.grams - free;
-
   return {
     calories:v.caloriesPer100g*scale,
     protein:v.proteinPer100g*scale,
     carbs:v.carbsPer100g*scale,
     fat:v.fatPer100g*scale,
-    price:(v.price||0)*(paid/100)
+    price:(paid/50)*(v.price||0)
   };
 }
 
@@ -690,7 +687,7 @@ function adjustVegGrams(delta){
 }
 function toggleVeg(){
   const meal = currentMealObj();
-  meal.vegetable.grams = meal.vegetable.grams>0 ? 0 : 100;
+  meal.vegetable.grams = meal.vegetable.grams>0 ? 0 : 50;
   render();
 }
 
@@ -982,8 +979,11 @@ function renderVegStep(meal){
   const s = t();
   const v = MENU.VEGETABLE;
   const grams = meal.vegetable.grams;
+ const proteinGrams = proteinGramsSum(meal);
+  const remainingFree = calcCarbTotals(meal, proteinGrams).remaining;
   let html = `<div class="section-head"><div class="section-kicker">${s.stepVegTitle}</div>
-    <div class="section-title">${s.stepVegTitle}</div><div class="section-hint">${s.stepVegHint}</div></div>`;
+    <div class="section-title">${s.stepVegTitle}</div>
+    <div class="section-hint">${s.stepVegHint} (${state.lang==="ar"?"الرصيد المجاني المتبقي":"remaining free allowance"}: ${fmtG(remainingFree)})</div></div>`;
   html += `<div class="card-grid"><div class="item-card ${grams>0?"selected":""}" style="--cat-color:#22402B">
     ${thumbHtml(v.id)}
     <div class="item-name">${v.name}</div>
@@ -1256,7 +1256,10 @@ function buildOrderPayload(){
       remaining -= free;
       items.push({ name:`${label} - ${it.name}`, grams: entry.grams, unitPrice: (paid/50)*it.priceAdd50 });
     });
-    if (meal.vegetable.grams>0){ items.push({ name:`${label} - ${MENU.VEGETABLE.name}`, grams: meal.vegetable.grams, unitPrice: 0 }); }
+    if (meal.vegetable.grams>0){ const freeV = Math.min(meal.vegetable.grams, remaining);
+  const paidV = meal.vegetable.grams - freeV;
+  remaining -= freeV;
+  items.push({ name:`${label} - ${MENU.VEGETABLE.name}`, grams: meal.vegetable.grams, unitPrice: (paidV/50)*(MENU.VEGETABLE.price||0)}); }
     if (meal.sauce){ const sa = findSauce(meal.sauce); items.push({ name:`${label} - ${sa.name}`, unitPrice: sa.price }); }
   });
   Object.entries(state.extras.salads).forEach(([id,qty])=>{
