@@ -198,7 +198,7 @@ h1.hero-title{font-size:clamp(32px,5.2vw,58px);line-height:1.08;max-width:16ch;c
     <div class="landing">
       <div class="landing-topbar">
         <div class="brand">
-          <div class="brand-mark">H<img src="images/logo.png" alt="" onerror="this.remove()"></div>
+          <div class="brand-mark">H<img src="images/logo.jpeg" alt="" onerror="this.remove()"></div>
           <div><div class="brand-name" id="brand-name">هيلثي لايف</div><div class="brand-sub" id="brand-sub">مطبخ صحي</div></div>
         </div>
         <button class="lang-toggle lang-toggle-btn" id="btn-lang-landing">English</button>
@@ -758,7 +758,7 @@ function renderAppShell(){
     <header class="app-header">
       <div class="app-header-row">
         <div class="header-left">
-         <div class="brand-mark small">H<img src="images/logo.png" alt="" onerror="this.remove()"></div>
+         <div class="brand-mark small">H<img src="images/logo.jpeg" alt="" onerror="this.remove()"></div>
           <button class="icon-btn" id="btn-shell-back" aria-label="back">
             <svg class="flip-rtl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
           </button>
@@ -884,8 +884,7 @@ function renderWizard(main){
 }
 
 function catColor(key){
-  const map = { chicken:"#C98F55", meat:"#C7A93F", fish:"#6FA466", salmon:"#5C93B0", shrimp:"#B0708F" };
-  return map[key] || "var(--line)";
+  return "#22402B";
 }
 function thumbHtml(id, wide){
   return `<div class="item-thumb${wide ? " wide" : ""}">
@@ -965,7 +964,7 @@ function renderCarbStep(meal){
   MENU.CARB_ITEMS.forEach(item=>{
     const entryIdx = items.findIndex(e=>e.id===item.id);
     const selected = entryIdx>=0;
-    html += `<div class="item-card ${selected?"selected":""}" style="--cat-color:#C7A93F">
+    html += `<div class="item-card ${selected?"selected":""}" style="--cat-color:#22402B">
       ${selected?`<span class="role-badge">${entryIdx===0?"1":"2"}</span>`:""}
       ${thumbHtml(item.id)}
       <div class="item-name">${item.name}</div>
@@ -985,7 +984,7 @@ function renderVegStep(meal){
   const grams = meal.vegetable.grams;
   let html = `<div class="section-head"><div class="section-kicker">${s.stepVegTitle}</div>
     <div class="section-title">${s.stepVegTitle}</div><div class="section-hint">${s.stepVegHint}</div></div>`;
-  html += `<div class="card-grid"><div class="item-card ${grams>0?"selected":""}" style="--cat-color:#6FA466">
+  html += `<div class="card-grid"><div class="item-card ${grams>0?"selected":""}" style="--cat-color:#22402B">
     ${thumbHtml(v.id)}
     <div class="item-name">${v.name}</div>
     <div class="item-meta">${Math.round(v.caloriesPer100g)} ${s.kcalUnit}/100g</div>
@@ -1052,7 +1051,7 @@ function renderExtras(main){
   html += `<div class="card-grid">`;
   list.forEach(it=>{
     const qty = bag[it.id]||0;
-    html += `<div class="item-card ${qty>0?"selected":""}" style="--cat-color:var(--accent)">
+   html += `<div class="item-card ${qty>0?"selected":""}" style="--cat-color:#22402B">
       ${thumbHtml(it.id)}
       <div class="item-name">${it.name}</div>
       <div class="item-meta">${fmtPrice(it.price)}${it.calories?` · ${Math.round(it.calories)} ${s.kcalUnit}`:""}</div>
